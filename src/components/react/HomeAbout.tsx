@@ -9,20 +9,22 @@ function HomeAboutInner() {
 	const { t } = useTranslation();
 
 	return (
-		<section className="shell home__prose home__prose--en" aria-labelledby="home-about-title">
-			<h2 id="home-about-title">{t('home.aboutTitle')}</h2>
-			<p>{t('home.aboutP1')}</p>
-			<p>
-				{t('home.aboutP2Before')}{' '}
-				<a href="/tarkov-cheats/">{t('home.aboutPillar')}</a>
-				{t('home.aboutP2Mid')}
-				<a href="/tarkov-esp/">{t('home.aboutEsp')}</a>
-				{t('home.aboutP2Mid')}
-				<a href="/tarkov-aimbot/">{t('home.aboutAimbot')}</a>
-				{t('home.aboutP2Or')}
-				<a href="/updates/">{t('home.aboutUndetected')}</a>
-				{t('home.aboutP2After')}
-			</p>
+		<section className="shell home__intro" aria-labelledby="home-about-title">
+			<div className="home__intro-block">
+				<h1 id="home-about-title">{t('home.aboutTitle')}</h1>
+				<p>{t('home.aboutP1')}</p>
+				<p>
+					{t('home.aboutP2Before')}{' '}
+					<a href="/tarkov-cheats/">{t('home.aboutPillar')}</a>
+					{t('home.aboutP2Mid')}
+					<a href="/tarkov-esp/">{t('home.aboutEsp')}</a>
+					{t('home.aboutP2Mid')}
+					<a href="/tarkov-aimbot/">{t('home.aboutAimbot')}</a>
+					{t('home.aboutP2Or')}
+					<a href="/updates/">{t('home.aboutUndetected')}</a>
+					{t('home.aboutP2After')}
+				</p>
+			</div>
 		</section>
 	);
 }
