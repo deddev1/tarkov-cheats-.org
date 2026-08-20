@@ -57,9 +57,9 @@ export const heroSizes = '100vw';
 export const heroPreloadSrc = heroSrc;
 export const heroMimeType = 'image/webp';
 
-/** Exact native dimensions (no zoom crop). */
+/** Exact native dimensions (cover crop at hero ratio). */
 export const heroWidth = 1024;
-export const heroHeight = 409;
+export const heroHeight = 325;
 
 /** Responsive widths for below-fold content images. */
 export const contentWidths = [480, 960] as const;
