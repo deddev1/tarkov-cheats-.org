@@ -1,4 +1,4 @@
-/** Homepage preview clip — self-hosted for CSP/CORP compatibility. */
+/** Homepage preview clip — self-hosted, 640×360 web encode, lazy-loaded on click. */
 export const homePreviewVideo = {
 	url: '/videos/tarkov-clip.mp4',
 	poster: '/images/tarkov-clip-poster-640w.webp',

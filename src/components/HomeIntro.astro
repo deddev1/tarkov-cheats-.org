@@ -30,7 +30,29 @@ const video = homePreviewVideo;
 			</p>
 		</div>
 
-		<figure id="home-intro-video" class="home-intro__video-wrap">
+		<figure id="home-intro-video" class="home-intro__video-wrap" data-home-video={video.url}>
+			<button
+				type="button"
+				class="home-intro__video-trigger"
+				data-home-video-trigger
+				aria-label="Play undetected Tarkov cheats preview video"
+			>
+				<img
+					src={video.poster}
+					alt="Tarkov cheats gameplay preview — click to play"
+					width={video.width}
+					height={video.height}
+					loading="lazy"
+					decoding="async"
+					fetchpriority="low"
+				/>
+				<span class="home-intro__video-play" aria-hidden="true">
+					<svg viewBox="0 0 24 24" fill="none">
+						<circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"></circle>
+						<path d="M10 8.2v7.6L16.2 12 10 8.2z" fill="currentColor"></path>
+					</svg>
+				</span>
+			</button>
 			<video
 				class="home-intro__video"
 				controls
@@ -39,18 +61,47 @@ const video = homePreviewVideo;
 				width={video.width}
 				height={video.height}
 				poster={video.poster}
-				src={video.url}
-			>
-				<a href={video.url}>Download Tarkov cheats preview video</a>
-			</video>
+				hidden
+			></video>
 			<figcaption class="home-intro__video-caption">
-				<a href={video.url} rel="noopener noreferrer">
-					Watch Tarkov cheats preview
-				</a>
+				<a href={video.url}>Watch Tarkov cheats preview</a>
 			</figcaption>
 		</figure>
 	</div>
 </section>
+
+<script>
+	document.querySelectorAll('[data-home-video]').forEach((wrap) => {
+		const trigger = wrap.querySelector('[data-home-video-trigger]');
+		const video = wrap.querySelector('video');
+		const url = wrap.getAttribute('data-home-video');
+		if (!trigger || !video || !url) return;
+
+		trigger.addEventListener('click', async () => {
+			trigger.hidden = true;
+			video.removeAttribute('hidden');
+
+			if (!video.getAttribute('src')) {
+				video.setAttribute('src', url);
+				video.load();
+			}
+
+			try {
+				await new Promise<void>((resolve, reject) => {
+					if (video.readyState >= 2) {
+						resolve();
+						return;
+					}
+					video.addEventListener('canplay', () => resolve(), { once: true });
+					video.addEventListener('error', () => reject(new Error('video load failed')), { once: true });
+				});
+				await video.play();
+			} catch {
+				// Keep controls visible so the user can press play manually.
+			}
+		});
+	});
+</script>
 
 <style>
 	.home-intro {
@@ -106,6 +157,47 @@ const video = homePreviewVideo;
 	.home-intro__video-wrap {
 		margin: 0;
 		width: 100%;
+		content-visibility: auto;
+		contain-intrinsic-size: 360px;
+	}
+
+	.home-intro__video-trigger {
+		display: block;
+		position: relative;
+		width: 100%;
+		padding: 0;
+		border: 1px solid var(--line-soft);
+		border-radius: var(--radius-md, 0.75rem);
+		overflow: hidden;
+		background: #050506;
+		cursor: pointer;
+	}
+
+	.home-intro__video-trigger img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.home-intro__video-play {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 6, 0.55));
+		color: #fff;
+	}
+
+	.home-intro__video-play svg {
+		width: 3rem;
+		height: 3rem;
+		filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+	}
+
+	.home-intro__video-trigger:hover .home-intro__video-play {
+		background: linear-gradient(180deg, rgba(83, 17, 238, 0.12), rgba(5, 5, 6, 0.62));
 	}
 
 	.home-intro__video {
