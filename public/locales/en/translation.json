@@ -118,7 +118,11 @@
   },
   "home": {
     "aboutTitle": "Undetected tarkov cheats for Escape from Tarkov",
-    "aboutP1": "Tarkov Cheats is an undetected Escape from Tarkov cheat package for Windows PC. One license includes ESP wallhack, soft aim, and 2D radar, with BattlEye rebuilds after game patches. Compare plans on Store, then check Status before you raid.",
+    "aboutP1Before": "Tarkov Cheats is an undetected Escape from Tarkov cheat package for Windows PC. One license includes ESP wallhack, soft aim, and 2D radar, with BattlEye rebuilds after game patches. Compare plans on ",
+    "aboutStore": "Store",
+    "aboutP1Mid": ", then check ",
+    "aboutStatus": "Status",
+    "aboutP1After": " before you raid.",
     "aboutP2Before": "Start with the",
     "aboutPillar": "tarkov cheats pillar",
     "aboutEsp": "ESP guide",

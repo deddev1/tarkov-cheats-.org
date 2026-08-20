@@ -12,7 +12,13 @@ function HomeAboutInner() {
 		<section className="shell home__intro" aria-labelledby="home-about-title">
 			<div className="home__intro-block">
 				<h1 id="home-about-title">{t('home.aboutTitle')}</h1>
-				<p>{t('home.aboutP1')}</p>
+				<p>
+					{t('home.aboutP1Before')}
+					<a href="/pricing/">{t('home.aboutStore')}</a>
+					{t('home.aboutP1Mid')}
+					<a href="/updates/">{t('home.aboutStatus')}</a>
+					{t('home.aboutP1After')}
+				</p>
 				<p>
 					{t('home.aboutP2Before')}{' '}
 					<a href="/tarkov-cheats/">{t('home.aboutPillar')}</a>
