@@ -124,6 +124,7 @@ const SECURITY_HEADERS = {
 		"frame-ancestors 'none'",
 		"form-action 'self' https://zadeyo.com",
 		"img-src 'self' data: blob: https:",
+		"media-src 'self'",
 		"font-src 'self' data:",
 		"style-src 'self' 'unsafe-inline'",
 		"script-src 'self'",

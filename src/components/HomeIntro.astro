@@ -1,0 +1,198 @@
+---
+import en from '../../public/locales/en/translation.json';
+import { homePreviewVideo } from '../data/home-media';
+
+const home = en.home;
+const video = homePreviewVideo;
+---
+
+<section class="shell home-intro" aria-labelledby="home-about-title">
+	<div class="home-intro__grid">
+		<div class="home-intro__block">
+			<h1 id="home-about-title" class="home-intro__title">{home.aboutTitle}</h1>
+			<p>
+				{home.aboutP1Before}
+				<a href="/pricing/">{home.aboutStore}</a>
+				{home.aboutP1Mid}
+				<a href="/updates/">{home.aboutStatus}</a>
+				{home.aboutP1After}
+			</p>
+			<p>
+				{home.aboutP2Before}{' '}
+				<a href="/tarkov-cheats/">{home.aboutPillar}</a>
+				{home.aboutP2Mid}
+				<a href="/tarkov-esp/">{home.aboutEsp}</a>
+				{home.aboutP2Mid}
+				<a href="/tarkov-aimbot/">{home.aboutAimbot}</a>
+				{home.aboutP2Or}
+				<a href="/updates/">{home.aboutUndetected}</a>
+				{home.aboutP2After}
+			</p>
+		</div>
+
+		<figure id="home-intro-video" class="home-intro__video-wrap" data-home-video={video.url}>
+			<button
+				type="button"
+				class="home-intro__video-trigger"
+				data-home-video-trigger
+				aria-label="Play undetected Tarkov cheats preview video"
+			>
+				<img
+					src={video.poster}
+					alt="Tarkov cheats gameplay preview — click to play"
+					width={video.width}
+					height={video.height}
+					loading="lazy"
+					decoding="async"
+					fetchpriority="low"
+				/>
+			</button>
+			<video
+				class="home-intro__video"
+				controls
+				preload="none"
+				playsinline
+				width={video.width}
+				height={video.height}
+				poster={video.poster}
+				hidden
+			></video>
+		</figure>
+	</div>
+</section>
+
+<script>
+	document.querySelectorAll('[data-home-video]').forEach((wrap) => {
+		const trigger = wrap.querySelector('[data-home-video-trigger]');
+		const video = wrap.querySelector('video');
+		const url = wrap.getAttribute('data-home-video');
+		if (!trigger || !video || !url) return;
+
+		trigger.addEventListener('click', async () => {
+			trigger.hidden = true;
+			video.removeAttribute('hidden');
+
+			if (!video.getAttribute('src')) {
+				video.setAttribute('src', url);
+				video.load();
+			}
+
+			try {
+				await new Promise<void>((resolve, reject) => {
+					if (video.readyState >= 2) {
+						resolve();
+						return;
+					}
+					video.addEventListener('canplay', () => resolve(), { once: true });
+					video.addEventListener('error', () => reject(new Error('video load failed')), { once: true });
+				});
+				await video.play();
+			} catch {
+				// Keep controls visible so the user can press play manually.
+			}
+		});
+	});
+</script>
+
+<style>
+	.home-intro {
+		padding-block: clamp(2rem, 4vw, 2.75rem) 0.5rem;
+		border-bottom: 1px solid var(--line-soft);
+	}
+
+	.home-intro__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(220px, 360px);
+		gap: clamp(1.25rem, 3vw, 2rem);
+		align-items: start;
+	}
+
+	.home-intro__block {
+		margin-inline: 0;
+		padding-left: 0.85rem;
+		border-left: 3px solid var(--magenta);
+		text-align: left;
+	}
+
+	.home-intro__title {
+		margin: 0 0 0.85rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 1.25;
+		color: var(--ink);
+	}
+
+	.home-intro p {
+		margin: 0;
+		font-size: 0.9375rem;
+		line-height: 1.65;
+		color: var(--ink-muted);
+	}
+
+	.home-intro p + p {
+		margin-top: 0.75rem;
+	}
+
+	.home-intro a {
+		color: var(--magenta-soft);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.home-intro a:hover {
+		color: var(--ink);
+	}
+
+	.home-intro__video-wrap {
+		margin: 0;
+		width: 100%;
+		content-visibility: auto;
+		contain-intrinsic-size: 360px;
+	}
+
+	.home-intro__video-trigger {
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 1px solid var(--line-soft);
+		border-radius: var(--radius-md, 0.75rem);
+		overflow: hidden;
+		background: #050506;
+		cursor: pointer;
+	}
+
+	.home-intro__video-trigger img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.home-intro__video[hidden] {
+		display: none !important;
+	}
+
+	.home-intro__video {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		border: 1px solid var(--line-soft);
+		border-radius: var(--radius-md, 0.75rem);
+		background: #000;
+		object-fit: cover;
+	}
+
+	@media (max-width: 768px) {
+		.home-intro__grid {
+			grid-template-columns: 1fr;
+		}
+
+		.home-intro__video-wrap {
+			max-width: 420px;
+		}
+	}
+</style>

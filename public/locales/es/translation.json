@@ -118,7 +118,11 @@
   },
   "home": {
     "aboutTitle": "Trucos indetectables de Tarkov para Escape from Tarkov",
-    "aboutP1": "Tarkov Cheats es un paquete de trucos indetectables para Escape from Tarkov en PC Windows. Una licencia incluye ESP wallhack, soft aim y radar 2D, con reconstrucciones BattlEye tras los parches del juego. Compara planes en la Tienda y revisa el Estado antes de entrar en raid.",
+    "aboutP1Before": "Tarkov Cheats es un paquete de trucos indetectables para Escape from Tarkov en PC Windows. Una licencia incluye ESP wallhack, soft aim y radar 2D, con reconstrucciones BattlEye tras los parches del juego. Compara planes en ",
+    "aboutStore": "Tienda",
+    "aboutP1Mid": " y revisa el ",
+    "aboutStatus": "Estado",
+    "aboutP1After": " antes de entrar en raid.",
     "aboutP2Before": "Empieza por el",
     "aboutPillar": "pilar de trucos de Tarkov",
     "aboutEsp": "guía de ESP",

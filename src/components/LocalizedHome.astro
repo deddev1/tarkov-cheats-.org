@@ -3,14 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import HomeReviews from '../components/HomeReviews.astro';
+import HomeIntro from '../components/HomeIntro.astro';
 import HomeSeo from '../components/HomeSeo.astro';
-import HomeAboutApp from '../components/react/HomeAbout';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getLocaleContent, getPageContent } from '../data/i18n';
 import { getLocalizedPath } from '../data/i18n/routing';
 import type { LocaleCode } from '../data/i18n/locales';
 import { homeFaqs, homeSeo, productInfo, siteConfig, customerReviewStats } from '../data/site';
 import { heroPreloadSrc, heroSizes, heroSrcSet } from '../lib/responsive-images';
+import { homePreviewVideo } from '../data/home-media';
 import { defaultCrawlImageSrc } from '../data/page-images';
 
 interface Props {
@@ -27,6 +28,9 @@ const description = locale === 'en' ? enHome.description : home.description;
 const canonicalPath = getLocalizedPath('home', locale);
 const canonicalURL = new URL(canonicalPath, siteConfig.url).href;
 const heroImage = new URL(siteConfig.defaultOgImage || defaultCrawlImageSrc, siteConfig.url).href;
+const previewVideoUrl = new URL(homePreviewVideo.url, siteConfig.url).href;
+const previewVideoPoster = new URL(homePreviewVideo.posterFull, siteConfig.url).href;
+const previewVideoPageUrl = `${canonicalURL}#home-intro-video`;
 const priceValidUntil = '2027-12-31';
 
 const aggregateRating = {
@@ -82,6 +86,21 @@ const extraGraph: Record<string, unknown>[] = [
 		})),
 	},
 ];
+
+if (locale === 'en') {
+	extraGraph.push({
+		'@type': 'VideoObject',
+		'@id': `${canonicalURL}#intro-video`,
+		name: 'Undetected tarkov cheats for Escape from Tarkov',
+		description:
+			'Tarkov Cheats preview — undetected Escape from Tarkov cheat package with ESP wallhack, soft aim, and 2D radar on Windows PC.',
+		thumbnailUrl: previewVideoPoster,
+		contentUrl: previewVideoUrl,
+		embedUrl: previewVideoPageUrl,
+		uploadDate: homePreviewVideo.uploadDate,
+		publisher: { '@id': `${siteConfig.url}/#organization` },
+	});
+}
 ---
 
 <Layout
@@ -110,7 +129,7 @@ const extraGraph: Record<string, unknown>[] = [
 			{
 				locale === 'en' ? (
 					<>
-						<HomeAboutApp client:visible locale={locale} />
+						<HomeIntro />
 						<HomeSeo locale={locale} />
 					</>
 				) : (
@@ -153,21 +172,6 @@ const extraGraph: Record<string, unknown>[] = [
 		color: var(--ink-muted);
 		line-height: 1.65;
 		font-size: 0.9375rem;
-	}
-
-	.home__prose--en {
-		padding-block: clamp(2rem, 4vw, 2.75rem) 0.5rem;
-		border-bottom: 1px solid var(--line-soft);
-	}
-
-	.home__prose--en a {
-		color: var(--magenta-soft);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.home__prose--en a:hover {
-		color: var(--ink);
 	}
 
 	.home__prose h2 {
