@@ -4,39 +4,46 @@ import en from '../../public/locales/en/translation.json';
 const home = en.home;
 ---
 
-<section class="home-intro shell" aria-labelledby="home-about-title">
-	<h1 id="home-about-title" class="home-intro__title">{home.aboutTitle}</h1>
-	<p>
-		{home.aboutP1Before}
-		<a href="/pricing/">{home.aboutStore}</a>
-		{home.aboutP1Mid}
-		<a href="/updates/">{home.aboutStatus}</a>
-		{home.aboutP1After}
-	</p>
-	<p>
-		{home.aboutP2Before}{' '}
-		<a href="/tarkov-cheats/">{home.aboutPillar}</a>
-		{home.aboutP2Mid}
-		<a href="/tarkov-esp/">{home.aboutEsp}</a>
-		{home.aboutP2Mid}
-		<a href="/tarkov-aimbot/">{home.aboutAimbot}</a>
-		{home.aboutP2Or}
-		<a href="/updates/">{home.aboutUndetected}</a>
-		{home.aboutP2After}
-	</p>
+<section class="shell home-intro" aria-labelledby="home-about-title">
+	<div class="home-intro__block">
+		<h1 id="home-about-title" class="home-intro__title">{home.aboutTitle}</h1>
+		<p>
+			{home.aboutP1Before}
+			<a href="/pricing/">{home.aboutStore}</a>
+			{home.aboutP1Mid}
+			<a href="/updates/">{home.aboutStatus}</a>
+			{home.aboutP1After}
+		</p>
+		<p>
+			{home.aboutP2Before}{' '}
+			<a href="/tarkov-cheats/">{home.aboutPillar}</a>
+			{home.aboutP2Mid}
+			<a href="/tarkov-esp/">{home.aboutEsp}</a>
+			{home.aboutP2Mid}
+			<a href="/tarkov-aimbot/">{home.aboutAimbot}</a>
+			{home.aboutP2Or}
+			<a href="/updates/">{home.aboutUndetected}</a>
+			{home.aboutP2After}
+		</p>
+	</div>
 </section>
 
 <style>
 	.home-intro {
-		max-width: 42rem;
 		padding-block: clamp(2rem, 4vw, 2.75rem) 0.5rem;
 		border-bottom: 1px solid var(--line-soft);
 	}
 
-	.home-intro__title {
-		margin: 0 0 0.85rem;
+	.home-intro__block {
+		width: min(100%, 42rem);
+		margin-inline: 0;
 		padding-left: 0.85rem;
 		border-left: 3px solid var(--magenta);
+		text-align: left;
+	}
+
+	.home-intro__title {
+		margin: 0 0 0.85rem;
 		font-family: var(--font-display);
 		font-size: clamp(1.25rem, 2.5vw, 1.6rem);
 		font-weight: 700;
