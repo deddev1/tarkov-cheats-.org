@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import HomeReviews from '../components/HomeReviews.astro';
+import HomeIntro from '../components/HomeIntro.astro';
 import HomeSeo from '../components/HomeSeo.astro';
-import HomeAboutApp from '../components/react/HomeAbout';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getLocaleContent, getPageContent } from '../data/i18n';
 import { getLocalizedPath } from '../data/i18n/routing';
@@ -110,7 +110,7 @@ const extraGraph: Record<string, unknown>[] = [
 			{
 				locale === 'en' ? (
 					<>
-						<HomeAboutApp client:load locale={locale} />
+						<HomeIntro />
 						<HomeSeo locale={locale} />
 					</>
 				) : (
@@ -166,59 +166,6 @@ const extraGraph: Record<string, unknown>[] = [
 	.home__prose h3 {
 		margin: 1.25rem 0 0.5rem;
 		font-size: 1rem;
-		color: var(--ink);
-	}
-</style>
-
-<style is:global>
-	.home__intro {
-		padding-block: clamp(2rem, 4vw, 2.75rem) 0.5rem;
-		border-bottom: 1px solid var(--line-soft);
-	}
-
-	.home__intro-block {
-		max-width: 42rem;
-		padding: clamp(1.15rem, 2.5vw, 1.5rem) clamp(1.1rem, 2.5vw, 1.35rem);
-		border-left: 3px solid var(--magenta);
-		border-radius: 0 var(--radius-md, 0.75rem) var(--radius-md, 0.75rem) 0;
-		background:
-			linear-gradient(
-				90deg,
-				color-mix(in srgb, var(--magenta) 10%, transparent),
-				transparent 55%
-			),
-			var(--bg-elevated);
-		box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 4%, transparent);
-	}
-
-	.home__intro-block h1 {
-		margin: 0 0 0.75rem;
-		font-family: var(--font-display);
-		font-size: clamp(1.35rem, 2.8vw, 1.75rem);
-		font-weight: 700;
-		letter-spacing: -0.03em;
-		line-height: 1.2;
-		color: var(--ink);
-	}
-
-	.home__intro-block p {
-		margin: 0;
-		font-size: clamp(0.9375rem, 1.6vw, 1rem);
-		line-height: 1.65;
-		color: var(--ink-muted);
-	}
-
-	.home__intro-block p + p {
-		margin-top: 0.85rem;
-	}
-
-	.home__intro-block a {
-		color: var(--magenta-soft);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.home__intro-block a:hover {
 		color: var(--ink);
 	}
 </style>
