@@ -78,15 +78,15 @@ function HeroInner({
 	useBrandHero = true,
 }: Props) {
 	const { t } = useTranslation();
-	const title = useBrandHero ? t('hero.title') : t('hero.accent');
-	const subtitle = useBrandHero ? t('hero.subtitle') : t('hero.subtitle');
+	const title = useBrandHero ? t('home.aboutTitle') : t('hero.accent');
+	const subtitle = useBrandHero ? t('home.aboutP1') : t('hero.subtitle');
 	const ctaBuy = useBrandHero ? t('cta.buy') : t('hero.buyNow');
 	const priceFrom = t('hero.priceFrom');
 	const priceLabel = priceFrom ? `${priceFrom} $${monthlyPrice}` : `$${monthlyPrice}`;
 	const imageAlt = t('hero.imageAlt', { brand: siteName });
 
 	return (
-		<section className="hero" aria-label={title}>
+		<section className="hero" aria-labelledby={useBrandHero ? 'home-about-title' : undefined} aria-label={useBrandHero ? undefined : title}>
 			<div className="hero__media">
 				<img
 					src={heroSrc}
@@ -103,12 +103,28 @@ function HeroInner({
 			<div className="hero__veil" aria-hidden="true" />
 			<div className="shell hero__content">
 				<div className="hero__copy">
-					<p className="hero__brand">
-						{useBrandHero ? <span data-edit="name">{title}</span> : title}
-					</p>
-					<p className="hero__lede" data-edit={useBrandHero ? 'heroLede' : undefined}>
-						{subtitle}
-					</p>
+					{useBrandHero ? (
+						<div className="hero__intro-block">
+							<h1 id="home-about-title">{title}</h1>
+							<p>{subtitle}</p>
+							<p className="hero__intro-links">
+								{t('home.aboutP2Before')}{' '}
+								<a href="/tarkov-cheats/">{t('home.aboutPillar')}</a>
+								{t('home.aboutP2Mid')}
+								<a href="/tarkov-esp/">{t('home.aboutEsp')}</a>
+								{t('home.aboutP2Mid')}
+								<a href="/tarkov-aimbot/">{t('home.aboutAimbot')}</a>
+								{t('home.aboutP2Or')}
+								<a href="/updates/">{t('home.aboutUndetected')}</a>
+								{t('home.aboutP2After')}
+							</p>
+						</div>
+					) : (
+						<>
+							<p className="hero__brand">{title}</p>
+							<p className="hero__lede">{subtitle}</p>
+						</>
+					)}
 					<div className="hero__actions">
 						<a className="hero__buy" href={checkoutUrl} rel="noopener noreferrer">
 							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
