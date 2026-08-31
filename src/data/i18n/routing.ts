@@ -717,24 +717,29 @@ export function absoluteLocalizedUrl(pageId: PageId, locale: LocaleCode): string
 
 export type HreflangAlternate = { hreflang: string; href: string };
 
+function tagsForLocale(code: LocaleCode): string[] {
+	const meta = localeMap[code];
+	return [meta.hreflang, ...(meta.hreflangAliases ?? [])];
+}
+
+function expandHreflang(href: string, code: LocaleCode): HreflangAlternate[] {
+	return tagsForLocale(code).map((hreflang) => ({ hreflang, href }));
+}
+
 /** Self-referential hreflang for single-locale pages (reviews, 404). */
 export function getSelfHreflangAlternates(
 	path: string,
 	locale: LocaleCode = defaultLocale,
 ): HreflangAlternate[] {
 	const href = buildCanonicalUrl(path);
-	return [
-		{ hreflang: localeMap[locale].hreflang, href },
-		{ hreflang: 'x-default', href },
-	];
+	return [...expandHreflang(href, locale), { hreflang: 'x-default', href }];
 }
 
 export function getHreflangAlternates(pageId: PageId, currentLocale: LocaleCode = defaultLocale) {
 	const resolvedId = (isCannibalPageId(pageId) ? getCannibalTargetId(pageId) : pageId) as PageId;
 	const byLocale = localeCodes.map((code) => ({
-		hreflang: localeMap[code].hreflang,
-		href: absoluteLocalizedUrl(resolvedId, code),
 		code,
+		href: absoluteLocalizedUrl(resolvedId, code),
 	}));
 	const self = byLocale.find((alt) => alt.code === currentLocale)!;
 	const others = byLocale.filter((alt) => alt.code !== currentLocale);
@@ -742,10 +747,9 @@ export function getHreflangAlternates(pageId: PageId, currentLocale: LocaleCode 
 		hreflang: 'x-default' as const,
 		href: absoluteLocalizedUrl(resolvedId, defaultLocale),
 	};
-	// Self-referential hreflang first — required by Google/Seobility for the active locale.
 	return [
-		{ hreflang: self.hreflang, href: self.href },
-		...others.map(({ hreflang, href }) => ({ hreflang, href })),
+		...expandHreflang(self.href, self.code),
+		...others.flatMap((alt) => expandHreflang(alt.href, alt.code)),
 		xDefault,
 	];
 }

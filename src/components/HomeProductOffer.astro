@@ -1,0 +1,290 @@
+---
+import HomeProductOfferApp from './react/HomeProductOffer';
+import type { LocaleCode } from '../data/i18n/locales';
+import { productInfo, siteConfig } from '../data/site';
+import { tarkovImages } from '../data/tarkov';
+
+interface Props {
+	locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const monthly = productInfo.plans.find((p) => p.id === 'monthly') ?? productInfo.plans[0];
+const lifetime = productInfo.plans.find((p) => p.id === 'lifetime') ?? productInfo.plans[1];
+
+const shots = [
+	{ src: tarkovImages.cheatsCombat, alt: 'Raid combat overlay with Tarkov Cheats on Windows PC' },
+	{ src: tarkovImages.espWallhack, alt: 'Wallhack outlines for PMCs and Scavs in a Tarkov raid' },
+	{ src: tarkovImages.aimbotCombat, alt: 'Soft aim overlay during Escape from Tarkov combat' },
+	{ src: tarkovImages.aimbotSkeleton, alt: 'Aimbot bone view for Tarkov Cheats' },
+	{ src: tarkovImages.playerEsp, alt: '2D radar overlay for nearby Tarkov threats' },
+	{ src: '/images/tarkov-cheats-esp.webp', alt: 'ESP player boxes and distance tags in raid' },
+];
+---
+
+<HomeProductOfferApp
+	client:visible
+	locale={locale}
+	productName={siteConfig.name}
+	checkoutUrl={siteConfig.checkoutUrl}
+	monthly={{ id: monthly.id, label: monthly.label, price: monthly.price }}
+	lifetime={{ id: lifetime.id, label: lifetime.label, price: lifetime.price }}
+	shots={shots}
+/>
+
+<style is:global>
+	.home-offer {
+		padding-block: var(--home-y, clamp(2.5rem, 4.2vw, 3.5rem));
+		background: var(--bg);
+		border-top: 1px solid var(--line-soft);
+	}
+
+	.home-offer__panel {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+		gap: clamp(1.25rem, 2.5vw, 2rem);
+		padding: clamp(1rem, 2vw, 1.35rem);
+		border: 1px solid var(--line);
+		border-radius: 18px;
+		background: var(--bg-panel);
+	}
+
+	.home-offer__gallery {
+		min-width: 0;
+	}
+
+	.home-offer__stage {
+		margin: 0;
+		overflow: hidden;
+		border-radius: 14px;
+		background: var(--bg);
+		border: 1px solid var(--line-soft);
+	}
+
+	.home-offer__stage img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.home-offer__thumbs {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 0.45rem;
+		margin-top: 0.65rem;
+	}
+
+	.home-offer__thumb {
+		margin: 0;
+		padding: 0;
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		overflow: hidden;
+		background: var(--bg-elevated);
+		cursor: pointer;
+		opacity: 0.72;
+	}
+
+	.home-offer__thumb.is-active,
+	.home-offer__thumb:hover {
+		opacity: 1;
+		border-color: var(--accent);
+	}
+
+	.home-offer__thumb img {
+		display: block;
+		width: 100%;
+		height: 3.15rem;
+		object-fit: cover;
+	}
+
+	.home-offer__copy {
+		display: flex;
+		flex-direction: column;
+		gap: 0.9rem;
+		min-width: 0;
+	}
+
+	.home-offer__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.home-offer__head h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.15rem, 2vw, 1.45rem);
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--ink);
+	}
+
+	.home-offer__badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.28rem 0.7rem;
+		border: 1px solid color-mix(in srgb, var(--ok) 55%, var(--line));
+		border-radius: 999px;
+		color: var(--ok);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.home-offer__pulse {
+		width: 0.42rem;
+		height: 0.42rem;
+		border-radius: 999px;
+		background: var(--ok);
+		box-shadow: 0 0 8px color-mix(in srgb, var(--ok) 65%, transparent);
+	}
+
+	.home-offer__plans {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.65rem;
+	}
+
+	.home-offer__plan {
+		position: relative;
+		isolation: isolate;
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		padding: 0.85rem 0.9rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background: var(--bg-elevated);
+		color: var(--ink);
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.home-offer__plan.is-popular {
+		border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+		background: color-mix(in srgb, var(--accent) 10%, var(--bg-elevated));
+		padding-top: 1.05rem;
+	}
+
+	.home-offer__plan span {
+		font-size: 0.82rem;
+		color: var(--ink-muted);
+	}
+
+	.home-offer__plan strong {
+		font-size: 1.35rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	.home-offer__plan small {
+		font-size: 0.72rem;
+		color: var(--ink-faint);
+	}
+
+	.home-offer__popular {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		z-index: 2;
+		margin: 0;
+		padding: 0.12rem 0.5rem;
+		border-radius: 999px;
+		background: var(--accent);
+		color: var(--bg);
+		font-size: 0.62rem;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		white-space: nowrap;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+	}
+
+	.home-offer__cta {
+		position: relative;
+		isolation: isolate;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		min-height: 3rem;
+		border-radius: 12px;
+		background: var(--accent);
+		color: var(--bg);
+		font-size: 0.95rem;
+		font-weight: 800;
+		text-decoration: none;
+	}
+
+	.home-offer__cta svg {
+		width: 1.15rem;
+		height: 1.15rem;
+	}
+
+	.home-offer__perks {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.home-offer__perks li {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.7rem 0.75rem;
+		border: 1px solid var(--line);
+		border-radius: 10px;
+		background: var(--bg-elevated);
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	.home-offer__perk-icon {
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: 999px;
+		background: var(--accent);
+		flex-shrink: 0;
+	}
+
+	.home-offer__note {
+		margin: 0;
+		padding: 0.8rem 0.9rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background: var(--bg-elevated);
+		font-size: 0.8rem;
+		line-height: 1.5;
+		color: var(--ink-muted);
+	}
+
+	@media (max-width: 900px) {
+		.home-offer__panel {
+			grid-template-columns: 1fr;
+		}
+
+		.home-offer__thumbs {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.home-offer__plan,
+		.home-offer__cta {
+			transition: none;
+		}
+	}
+</style>

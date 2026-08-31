@@ -78,9 +78,9 @@ function HeroInner({
 	useBrandHero = true,
 }: Props) {
 	const { t } = useTranslation();
-	const title = useBrandHero ? t('hero.title') : t('hero.accent');
-	const subtitle = useBrandHero ? t('hero.subtitle') : t('hero.subtitle');
-	const ctaBuy = useBrandHero ? t('cta.buy') : t('hero.buyNow');
+	const title = t('hero.title');
+	const subtitle = t('hero.subtitle');
+	const ctaBuy = t('cta.buy');
 	const priceFrom = t('hero.priceFrom');
 	const priceLabel = priceFrom ? `${priceFrom} $${monthlyPrice}` : `$${monthlyPrice}`;
 	const imageAlt = t('hero.imageAlt', { brand: siteName });
@@ -110,7 +110,7 @@ function HeroInner({
 						{subtitle}
 					</p>
 					<div className="hero__actions">
-						<a className="hero__buy" href={checkoutUrl} rel="noopener noreferrer">
+						<a className="hero__buy has-btn-shine" href={checkoutUrl} rel="noopener noreferrer">
 							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
 								<path
 									d="M4.5 6.5h2.1l1.2 9.2h9.4l1.8-6.6H8.1M9.2 19.2a.9.9 0 100-1.8.9.9 0 000 1.8zm7.4 0a.9.9 0 100-1.8.9.9 0 000 1.8z"

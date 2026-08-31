@@ -74,7 +74,10 @@ function resolvePageId(path: string): PageId | undefined {
 const pageId = pageIdProp ?? resolvePageId(canonicalPath);
 const ui = getUi(locale);
 const homeHref = getLocalizedPath('home', locale);
-const resolvedEyebrow = eyebrow ?? ui.product.title;
+const resolvedEyebrow = (eyebrow ?? '').trim();
+const sameLabel = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
+const showEyebrow = Boolean(resolvedEyebrow) && !sameLabel(resolvedEyebrow, heading);
+const crumbLabel = heading;
 
 const normalizedGallery = gallery
 	.map((item) => {
@@ -88,7 +91,7 @@ const normalizedGallery = gallery
 
 const breadcrumbs = [
 	{ label: ui.nav.home, href: homeHref },
-	{ label: heading },
+	{ label: crumbLabel },
 ];
 
 const useHomeHero =
@@ -152,10 +155,16 @@ const useHomeHero =
 				<div class="banner__content">
 					<nav class="banner__crumbs" aria-label={t('common.breadcrumb')}>
 						<a href={homeHref}>{ui.nav.home}</a>
-						<span aria-hidden="true">/</span>
-						<span aria-current="page">{heading}</span>
+						{
+							!sameLabel(crumbLabel, heading) ? (
+								<>
+									<span aria-hidden="true">/</span>
+									<span aria-current="page">{crumbLabel}</span>
+								</>
+							) : null
+						}
 					</nav>
-					<p class="banner__eyebrow">{resolvedEyebrow}</p>
+					{showEyebrow ? <p class="banner__eyebrow">{resolvedEyebrow}</p> : null}
 					<h1 class="banner__title">{heading}</h1>
 					<p class="banner__intro" data-edit={introEdit || undefined}>{intro}</p>
 					{
@@ -436,11 +445,11 @@ const useHomeHero =
 		text-align: center;
 		text-decoration: none;
 		color: inherit;
-		transition: border-color 0.2s ease;
+		overflow: hidden;
 	}
 
 	.article :global(.price-card:hover) {
-		border-color: color-mix(in srgb, var(--magenta) 40%, var(--line));
+		border-color: var(--line);
 	}
 
 	.article :global(.price-card.is-featured) {

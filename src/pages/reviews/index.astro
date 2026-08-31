@@ -7,16 +7,17 @@ import { brandCopy, brandSeo, seoPageTitle } from '../../data/site-core';
 import { seoDescription } from '../../data/brand';
 import { getSelfHreflangAlternates } from '../../data/i18n/routing';
 import { getReviewPath, reviewsBasePath } from '../../data/reviews';
-import { defaultCrawlImageSrc } from '../../data/page-images';
+import { pickCrawlPhoto } from '../../data/page-images';
+import { tarkovImages } from '../../data/tarkov';
 import { contentSrcSet, productMainSizes } from '../../lib/responsive-images';
+import PillarLinks from '../../components/PillarLinks.astro';
+import ReviewStars from '../../components/ReviewStars.astro';
+import { getRelatedPillarLinks } from '../../data/internal-links';
 
 const title = seoPageTitle(brandSeo.reviewsTitle);
 const description = seoDescription(brandSeo.reviewsDescription);
 const reviewsIntro = fillBrandTokens(brandCopy.reviewsIntro);
-
-function stars(rating: number): string {
-	return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-}
+const buyLabel = `${brandCopy.ctaBuy} — $${productInfo.plans[0].price}`;
 
 const dateFormatter = new Intl.DateTimeFormat('en', {
 	day: 'numeric',
@@ -30,6 +31,7 @@ function formatDate(isoDate: string): string {
 }
 
 const sortedReviews = [...customerReviews].sort((a, b) => (a.date < b.date ? 1 : -1));
+const exploreLinks = getRelatedPillarLinks('hacks');
 
 const canonicalURL = new URL(reviewsBasePath, siteConfig.url).href;
 const hreflangAlternates = getSelfHreflangAlternates(reviewsBasePath);
@@ -55,7 +57,7 @@ const extraGraph: Record<string, unknown>[] = [
 	description={description}
 	canonicalPath={reviewsBasePath}
 	hreflangAlternates={hreflangAlternates}
-	ogImage={defaultCrawlImageSrc}
+	ogImage={tarkovImages.cheatsCombat}
 	ogImageAlt={fillBrandTokens('{brand} customer reviews')}
 	locale="en"
 	breadcrumbs={[
@@ -75,27 +77,37 @@ const extraGraph: Record<string, unknown>[] = [
 
 			<figure class="reviews-index__media">
 				<img
-					src={defaultCrawlImageSrc}
-					srcset={contentSrcSet(defaultCrawlImageSrc)}
+					src={tarkovImages.cheatsCombat}
+					srcset={contentSrcSet(tarkovImages.cheatsCombat)}
 					sizes={productMainSizes}
-					alt={fillBrandTokens('{brand} customer reviews')}
+					alt="In-raid Tarkov Cheats gameplay — ESP and combat overlay"
 					width="1280"
-					height="720"
+					height="580"
 					loading="eager"
 					decoding="async"
 					fetchpriority="high"
 				/>
 			</figure>
 
+			<ul class="reviews-index__thumbs" aria-label="In-game screenshots">
+				{
+					tarkovImages.gallery.slice(0, 5).map((shot) => (
+						<li>
+							<img src={shot.src} alt={shot.alt} width="240" height="135" loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+
 			<header class="reviews-index__head">
 				<div>
-					<h1 data-edit="navReviews">{siteConfig.name} reviews</h1>
+					<h1 data-edit="navReviews">What players say</h1>
 					<p class="reviews-index__intro" data-edit="reviewsIntro">{reviewsIntro}</p>
 				</div>
 				<div class="reviews-index__summary" aria-label={`${customerReviewStats.averageRating} out of 5 average rating`}>
 					<p class="reviews-index__avg">{customerReviewStats.averageRating.toFixed(1)}</p>
-					<p class="reviews-index__avg-stars" aria-hidden="true">{stars(Math.round(customerReviewStats.averageRating))}</p>
-					<p class="reviews-index__count">{customerReviewStats.totalCount} reviews · out of 5</p>
+					<p class="reviews-index__avg-stars"><ReviewStars rating={customerReviewStats.averageRating} /></p>
+					<p class="reviews-index__count">{customerReviewStats.totalCount} buyer reviews</p>
 				</div>
 			</header>
 
@@ -103,6 +115,15 @@ const extraGraph: Record<string, unknown>[] = [
 				{
 					sortedReviews.map((review) => (
 						<article class="reviews-index__card">
+							<img
+								class="reviews-index__card-shot"
+								src={pickCrawlPhoto(review.slug)}
+								alt=""
+								width="320"
+								height="180"
+								loading="lazy"
+								decoding="async"
+							/>
 							<div class="reviews-index__card-top">
 								<div class="reviews-index__who">
 									<span class="reviews-index__avatar" aria-hidden="true">{review.handle.charAt(0).toUpperCase()}</span>
@@ -112,7 +133,8 @@ const extraGraph: Record<string, unknown>[] = [
 									</div>
 								</div>
 								<p class="reviews-index__stars" aria-label={`${review.rating} out of 5 stars`}>
-									{stars(review.rating)}
+									<ReviewStars rating={review.rating} class="review-stars--card" />
+									<span class="reviews-index__rating-num">{review.rating}/5</span>
 								</p>
 							</div>
 							{review.tag ? <p class="reviews-index__tag">{review.tag}</p> : null}
@@ -136,10 +158,14 @@ const extraGraph: Record<string, unknown>[] = [
 				</p>
 				<div class="reviews-index__cta-row">
 					<a href={siteConfig.checkoutUrl} class="reviews-index__buy" rel="noopener noreferrer">
-						Buy Now — ${productInfo.plans[0].price}
+						{buyLabel}
 					</a>
 					<a href="/pricing/" class="reviews-index__link-btn">Compare pricing</a>
+					<a href="/tarkov-cheats/" class="reviews-index__link-btn">{brandCopy.navPreview}</a>
+					<a href="/features/" class="reviews-index__link-btn">{brandCopy.navFeatures}</a>
+					<a href="/updates/" class="reviews-index__link-btn">{brandCopy.navStatus}</a>
 				</div>
+				<PillarLinks links={exploreLinks} title="Explore product pages" />
 			</section>
 		</div>
 	</main>
@@ -169,8 +195,27 @@ const extraGraph: Record<string, unknown>[] = [
 		display: block;
 		width: 100%;
 		height: auto;
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 2.2 / 1;
 		object-fit: cover;
+	}
+
+	.reviews-index__thumbs {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.reviews-index__thumbs img {
+		display: block;
+		width: 100%;
+		height: 4.75rem;
+		object-fit: cover;
+		border-radius: 8px;
+		border: 1px solid var(--line);
+		background: var(--bg-elevated);
 	}
 
 	.reviews-index__crumbs {
@@ -241,9 +286,6 @@ const extraGraph: Record<string, unknown>[] = [
 
 	.reviews-index__avg-stars {
 		margin: 0;
-		font-size: 0.85rem;
-		letter-spacing: 0.08em;
-		color: var(--accent-amber);
 	}
 
 	.reviews-index__count {
@@ -262,13 +304,37 @@ const extraGraph: Record<string, unknown>[] = [
 		display: flex;
 		flex-direction: column;
 		gap: 0.6rem;
-		padding: 1.05rem 1.1rem;
+		padding: 0;
+		overflow: hidden;
 		border-radius: var(--radius-md, 0.75rem);
 		border: 1px solid var(--line);
 		background: var(--bg-panel);
 		transition:
 			border-color 0.2s ease,
 			transform 0.2s ease;
+	}
+
+	.reviews-index__card-shot {
+		display: block;
+		width: 100%;
+		height: 7.25rem;
+		object-fit: cover;
+		background: var(--bg-elevated);
+	}
+
+	.reviews-index__card-top,
+	.reviews-index__tag,
+	.reviews-index__text,
+	.reviews-index__more {
+		margin-inline: 1.05rem;
+	}
+
+	.reviews-index__card-top {
+		margin-top: 0.85rem;
+	}
+
+	.reviews-index__more {
+		margin-bottom: 1.05rem;
 	}
 
 	.reviews-index__card:hover {
@@ -321,10 +387,16 @@ const extraGraph: Record<string, unknown>[] = [
 
 	.reviews-index__stars {
 		margin: 0;
-		font-size: 0.82rem;
-		letter-spacing: 0.04em;
-		color: var(--accent-amber);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
 		white-space: nowrap;
+	}
+
+	.reviews-index__rating-num {
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: var(--ink-faint);
 	}
 
 	.reviews-index__tag {
@@ -442,7 +514,13 @@ const extraGraph: Record<string, unknown>[] = [
 		color: var(--magenta-soft);
 	}
 
-	@media (max-width: 680px) {
+		.reviews-index__thumbs {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.reviews-index__thumbs li:nth-child(n + 4) {
+			display: none;
+		}
 		.reviews-index__grid {
 			grid-template-columns: 1fr;
 		}

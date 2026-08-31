@@ -12,6 +12,8 @@ import {
 import type { ResolvedBlogPost } from '../data/blog/types';
 import { blogLabel, siteConfig } from '../data/site';
 import { getLocalizedPath, localizeInternalHref } from '../data/i18n/routing';
+import { getRelatedPillarLinks } from '../data/internal-links';
+import PillarLinks from './PillarLinks.astro';
 
 interface Props {
 	locale: LocaleCode;
@@ -26,6 +28,7 @@ const blogHref = getBlogBasePath(defaultLocale);
 const related = getAllPostsForLocale(defaultLocale)
 	.filter((p) => p.id !== post.id)
 	.slice(0, 3);
+const pillarLinks = getRelatedPillarLinks('hacks');
 
 const articleUrl = absoluteBlogUrl(defaultLocale, post.translations[defaultLocale]?.slug ?? t.slug);
 const hreflangAlternates = getBlogPostHreflangAlternates(post, locale);
@@ -146,6 +149,10 @@ function pageTitle(headline: string): string {
 				</section>
 			)
 		}
+
+		<section class="post__pillars">
+			<PillarLinks links={pillarLinks} title="Product pages" />
+		</section>
 			</div>
 		</div>
 	</main>
@@ -240,5 +247,11 @@ function pageTitle(headline: string): string {
 	}
 	.post__related a:hover {
 		text-decoration: underline;
+	}
+
+	.post__pillars {
+		margin-top: 2rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
 	}
 </style>

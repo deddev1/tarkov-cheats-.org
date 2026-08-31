@@ -202,6 +202,7 @@ export async function onRequest(context) {
 			'Cache-Control': 'no-store',
 			'CDN-Cache-Control': 'no-store',
 			'Cloudflare-CDN-Cache-Control': 'no-store',
+			'X-Robots-Tag': 'noindex, follow',
 		});
 		applySecurityHeaders(headers);
 		return new Response(null, { status: 301, headers });
@@ -216,6 +217,7 @@ export async function onRequest(context) {
 		const headers = new Headers({
 			Location: new URL(pathRedirect + url.search, CANONICAL_ORIGIN).toString(),
 			'Cache-Control': 'no-store',
+			'X-Robots-Tag': 'noindex, follow',
 		});
 		applySecurityHeaders(headers);
 		return new Response(null, { status: 301, headers });

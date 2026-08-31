@@ -75,9 +75,14 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 				h2: 'Updates & support',
 				paragraphs: [
 					'We rebuild after big {game} or {antiCheat} patches.',
-					'Check Status before you play after a patch day.',
+					'Check <a href="/updates/">Status</a> before you play after a patch day.',
 				],
-				list: ['Status on the Status page', 'Setup guide included', 'Email support with your order ID'],
+				list: [
+					'<a href="/updates/">Status page</a>',
+					'<a href="/setup/">Setup guide</a>',
+					'<a href="/faq/">FAQ</a>',
+					'Email support with your order ID',
+				],
 			},
 		],
 	}),
@@ -95,9 +100,14 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 				h2: 'What you get',
 				paragraphs: [
 					'Full package access for Windows 10 / 11.',
-					'Same ESP, soft aim, and radar on monthly and lifetime plans.',
+					'Same ESP, soft aim, and radar on monthly and lifetime plans. See <a href="/features/">Features</a> for the full list.',
 				],
-				list: ['ESP, aimbot, and radar', 'Patch rebuilds while active', 'Digital delivery after checkout'],
+				list: [
+					'<a href="/tarkov-cheats/">Product overview</a>',
+					'ESP, aimbot, and radar',
+					'Patch rebuilds while active',
+					'Digital delivery after checkout',
+				],
 			},
 			{
 				h2: 'Plans',
@@ -124,15 +134,15 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		h1: 'Status',
 		intro: brandCopy.statusIntro,
 		ctaPrimary: brandCopy.ctaBuy,
-		ctaSecondary: 'Tarkov Cheats overview',
+		ctaSecondary: 'Product overview',
 		ctaSecondaryHref: '/tarkov-cheats/',
 		galleryTitle: 'In-game look',
 		sections: [
 			{
 				h2: 'Current status',
 				paragraphs: [
-					'As of 13 Aug 2026 the package is online for Escape from Tarkov on Windows PC. We post a new note here when a game or BattlEye patch needs a rebuild.',
-					'If Status is green, you can raid. If we are rebuilding, wait for the next note.',
+					'Check the latest note below before you raid. We post here when a game or BattlEye patch needs a rebuild.',
+					'If Status is green, you can queue. If we are rebuilding, wait for the next note.',
 				],
 				list: [
 					'Check this page before every raid after a patch',
@@ -145,7 +155,13 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 				paragraphs: [
 					'Wait for our rebuild note, then launch. Do not play on an old build after a big update.',
 				],
-				list: ['Read the latest status note', 'Follow setup if something fails', 'Email support with your order ID'],
+				list: [
+					'Read the latest status note',
+					'<a href="/setup/">Setup guide</a>',
+					'<a href="/features/">Features</a>',
+					'<a href="/faq/">FAQ</a>',
+					'<a href="/support/">Support</a>',
+				],
 			},
 			{
 				h2: 'Important',
@@ -157,7 +173,7 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 	hacks: page({
 		title: brandSeo.previewTitle,
 		description: brandSeo.previewDescription,
-		h1: 'Tarkov Cheats',
+		h1: 'Cheats',
 		intro: brandCopy.previewIntro,
 		ctaPrimary: brandCopy.ctaBuy,
 		ctaSecondary: 'View features',
@@ -195,6 +211,7 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 					'<a href="/pricing/">Open store</a>',
 					'<a href="/setup/">Setup guide</a>',
 					'<a href="/updates/">Check status</a>',
+					'<a href="/faq/">FAQ</a>',
 				],
 			},
 		],
@@ -206,7 +223,7 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		h1: 'ESP',
 		intro: 'See players and loot through walls during Tarkov raids. Part of the same {brand} license.',
 		ctaPrimary: brandCopy.ctaBuy,
-		ctaSecondary: 'Tarkov Cheats overview',
+		ctaSecondary: 'Product overview',
 		ctaSecondaryHref: '/tarkov-cheats/',
 		galleryTitle: 'ESP in raid',
 		sections: [
@@ -217,17 +234,11 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 			},
 			{
 				h2: 'When to use it',
-				paragraphs: ['Clear dorms, Factory, and scav runs without flooding the screen.'],
-				list: ['Tune opacity', 'Filter noise', 'Pair with radar'],
-			},
-			{
-				h2: 'Next steps',
-				paragraphs: ['ESP is included with aimbot and radar in one plan.'],
-				list: [
-					'<a href="/tarkov-cheats/">Full product</a>',
-					'<a href="/features/">All features</a>',
-					'<a href="/pricing/">Store</a>',
+				paragraphs: [
+					'Clear dorms, Factory, and scav runs without flooding the screen.',
+					'ESP is included with aimbot and radar in one plan.',
 				],
+				list: ['Tune opacity', 'Filter noise', 'Pair with radar'],
 			},
 		],
 	}),
@@ -238,7 +249,7 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		h1: 'Aimbot',
 		intro: 'Soft aim and aim assist you can tune for Tarkov. Included in the same {brand} license.',
 		ctaPrimary: brandCopy.ctaBuy,
-		ctaSecondary: 'Tarkov Cheats overview',
+		ctaSecondary: 'Product overview',
 		ctaSecondaryHref: '/tarkov-cheats/',
 		galleryTitle: 'Aimbot view',
 		sections: [
@@ -249,17 +260,11 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 			},
 			{
 				h2: 'Play styles',
-				paragraphs: ['Keep settings subtle for longer sessions. Raise strength only when you accept more risk.'],
-				list: ['Legit soft aim', 'Per-weapon profiles', 'Works with ESP'],
-			},
-			{
-				h2: 'Next steps',
-				paragraphs: ['Aimbot ships with ESP and radar in one license.'],
-				list: [
-					'<a href="/tarkov-cheats/">Full product</a>',
-					'<a href="/features/">All features</a>',
-					'<a href="/pricing/">Store</a>',
+				paragraphs: [
+					'Keep settings subtle for longer sessions. Raise strength only when you accept more risk.',
+					'Aimbot ships with ESP and radar in one license.',
 				],
+				list: ['Legit soft aim', 'Per-weapon profiles', 'Works with ESP'],
 			},
 		],
 	}),
@@ -270,7 +275,7 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		h1: 'Radar',
 		intro: 'A simple 2D radar for threats outside your view. Included in the same {brand} license.',
 		ctaPrimary: brandCopy.ctaBuy,
-		ctaSecondary: 'Tarkov Cheats overview',
+		ctaSecondary: 'Product overview',
 		ctaSecondaryHref: '/tarkov-cheats/',
 		galleryTitle: 'Radar overlay',
 		sections: [
@@ -302,8 +307,15 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		sections: [
 			{
 				h2: 'Before you install',
-				paragraphs: ['Buy a plan first. You get a license by email.'],
-				list: ['Windows 10 / 11 PC', 'Disable conflicting overlays', 'Have your order email ready'],
+				paragraphs: [
+					'Buy a plan first on the <a href="/pricing/">Store</a>. You get a license by email.',
+				],
+				list: [
+					'<a href="/tarkov-cheats/">Product overview</a>',
+					'Windows 10 / 11 PC',
+					'Disable conflicting overlays',
+					'Have your order email ready',
+				],
 			},
 			{
 				h2: 'Install steps',
@@ -351,8 +363,15 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 		sections: [
 			{
 				h2: 'Buying & delivery',
-				paragraphs: ['You get a digital license by email after payment.'],
-				list: ['Instant delivery after checkout', 'Keep your order email', 'One license per purchase'],
+				paragraphs: [
+					'You get a digital license by email after payment. See <a href="/pricing/">Store</a> for plans.',
+				],
+				list: [
+					'<a href="/tarkov-cheats/">Product overview</a>',
+					'Instant delivery after checkout',
+					'Keep your order email',
+					'One license per purchase',
+				],
 			},
 			{
 				h2: 'Setup & updates',
@@ -363,6 +382,111 @@ export const simplePageCopy: Partial<Record<PageId, SimplePageCopy>> = {
 				h2: 'Refunds',
 				paragraphs: ['Read the refund policy before you buy if you need details.'],
 				list: ['<a href="/refund-policy/">Refund policy</a>', '<a href="/support/">Support</a>'],
+			},
+		],
+	}),
+	privacy: page({
+		title: 'Privacy Policy | {brand}',
+		description: 'How we handle support emails and order data when you use this site.',
+		h1: 'Privacy',
+		intro: 'How we handle information when you browse this site or contact support about a license.',
+		ctaPrimary: brandCopy.ctaBuy,
+		ctaSecondary: 'Terms of use',
+		ctaSecondaryHref: '/terms/',
+		galleryTitle: 'Legal',
+		sections: [
+			{
+				h2: 'What we collect',
+				paragraphs: [
+					'We collect what you send us — support emails, order IDs, and basic site analytics.',
+					'We do not sell personal data. Payment details are handled by the checkout provider.',
+				],
+				list: ['Support emails and order IDs', 'Basic usage analytics', 'No sale of personal data'],
+			},
+			{
+				h2: 'How we use it',
+				paragraphs: [
+					'We use your information to deliver licenses, answer support tickets, and keep the site running.',
+				],
+				list: ['License delivery', 'Support replies', 'Fraud prevention'],
+			},
+			{
+				h2: 'Your choices',
+				paragraphs: [
+					'Email {email} to ask about your data or request deletion where applicable.',
+					'Policy updates publish on this page. Continued use after updates means you accept the revised policy.',
+				],
+				list: [
+					'<a href="/terms/">Terms of use</a>',
+					'<a href="/refund-policy/">Refund policy</a>',
+					'<a href="/support/">Support</a>',
+				],
+			},
+		],
+	}),
+	refund: page({
+		title: 'Refund Policy | {brand}',
+		description: 'Refund rules for digital licenses. Read before you buy.',
+		h1: 'Refunds',
+		intro: 'Digital licenses deliver right after payment. Refunds are limited to the cases below.',
+		ctaPrimary: brandCopy.ctaBuy,
+		ctaSecondary: 'Privacy policy',
+		ctaSecondaryHref: '/privacy-policy/',
+		galleryTitle: 'Legal',
+		sections: [
+			{
+				h2: 'Digital delivery',
+				paragraphs: [
+					'Access starts as soon as your license is delivered by email.',
+					'Submit refund requests within 24 hours of purchase with your order ID and a short reason.',
+				],
+			},
+			{
+				h2: 'When we may approve',
+				paragraphs: [
+					'Duplicate charges, delivery failures we cannot fix, or technical issues we cannot resolve within 48 hours.',
+					'Refund decisions are final. Contact support before opening a chargeback.',
+				],
+				list: ['<a href="/terms/">Terms of use</a>', '<a href="/support/">Support</a>'],
+			},
+			{
+				h2: 'How to request',
+				paragraphs: [
+					'Email {email} with your order ID. Approved refunds go back to the original payment method when possible.',
+				],
+				list: ['<a href="/pricing/">Store</a>', '<a href="/faq/">FAQ</a>'],
+			},
+		],
+	}),
+	terms: page({
+		title: 'Terms of Use | {brand}',
+		description: 'License terms for {brand}. Personal use on Windows PC only.',
+		h1: 'Terms',
+		intro: 'By buying or using {brand} you agree to these terms.',
+		ctaPrimary: brandCopy.ctaBuy,
+		ctaSecondary: 'Privacy policy',
+		ctaSecondaryHref: '/privacy-policy/',
+		galleryTitle: 'Legal',
+		sections: [
+			{
+				h2: 'License',
+				paragraphs: [
+					'Licenses grant personal use of the software on Windows PC only.',
+					'Sharing, reselling, or reverse-engineering the package may revoke access.',
+				],
+			},
+			{
+				h2: 'Risk',
+				paragraphs: [
+					'Cheating can violate Battlestate Games terms and get your account banned. You accept that risk when you buy.',
+					'No cheat stays undetected forever. Check Status after patches.',
+				],
+				list: ['<a href="/updates/">Status</a>', '<a href="/refund-policy/">Refund policy</a>'],
+			},
+			{
+				h2: 'Support',
+				paragraphs: ['Questions about these terms? Email {email} with your order ID.'],
+				list: ['<a href="/support/">Support</a>', '<a href="/faq/">FAQ</a>'],
 			},
 		],
 	}),

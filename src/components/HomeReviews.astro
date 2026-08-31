@@ -31,7 +31,7 @@ const reviews = customerReviews.map((review) => ({
 
 <style is:global>
 	.reviews {
-		padding-block: clamp(3rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 3.5rem);
+		padding-block: var(--home-y, clamp(2.5rem, 4.2vw, 3.5rem));
 		background: var(--bg);
 		border-top: 1px solid var(--line-soft);
 		overflow: hidden;
@@ -54,7 +54,7 @@ const reviews = customerReviews.map((review) => ({
 
 	.reviews__eyebrow {
 		margin: 0 0 0.4rem;
-		font-size: 0.75rem;
+		font-size: var(--home-eyebrow, 0.72rem);
 		font-weight: 600;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
@@ -64,9 +64,9 @@ const reviews = customerReviews.map((review) => ({
 	.reviews__head h2 {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-		font-weight: 700;
-		letter-spacing: -0.02em;
+		font-size: var(--home-h2, clamp(1.45rem, 2.2vw, 1.75rem));
+		font-weight: 800;
+		letter-spacing: -0.03em;
 		line-height: 1.25;
 		color: var(--ink);
 	}
@@ -279,6 +279,23 @@ const reviews = customerReviews.map((review) => ({
 		margin-top: 0.15rem;
 		font-size: 0.75rem;
 		color: var(--ink-faint);
+	}
+
+	.review-card__rating-wrap {
+		display: grid;
+		justify-items: end;
+		gap: 0.2rem;
+	}
+
+	.review-card__stars {
+		display: flex;
+		gap: 0.08rem;
+		color: var(--accent-amber);
+	}
+
+	.review-card__stars svg {
+		width: 0.72rem;
+		height: 0.72rem;
 	}
 
 	.review-card__rating {

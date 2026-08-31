@@ -1,0 +1,66 @@
+---
+import type { InternalLink } from '../data/internal-links';
+import { localizeInternalHref } from '../data/i18n/routing';
+import type { LocaleCode } from '../data/i18n/locales';
+
+interface Props {
+	links: InternalLink[];
+	locale?: LocaleCode;
+	title?: string;
+}
+
+const { links, locale = 'en', title = 'Explore' } = Astro.props;
+const resolved = links.map((link) => ({
+	...link,
+	href: localizeInternalHref(link.href, locale),
+}));
+---
+
+{
+	resolved.length > 0 && (
+		<section class="pillar-links" aria-label={title}>
+			<ul class="pillar-links__list">
+				{resolved.map((link) => (
+					<li>
+						<a href={link.href}>{link.label}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}
+
+<style>
+	.pillar-links__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.pillar-links__list a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.15rem;
+		padding: 0.35rem 0.85rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-pill);
+		background: var(--bg-elevated);
+		font-size: 0.8125rem;
+		font-weight: 600;
+		color: var(--ink-muted);
+		text-decoration: none;
+		transition:
+			color 0.15s ease,
+			border-color 0.15s ease,
+			background 0.15s ease;
+	}
+
+	.pillar-links__list a:hover {
+		color: var(--magenta-soft);
+		border-color: color-mix(in srgb, var(--magenta) 40%, var(--line));
+		background: color-mix(in srgb, var(--magenta) 8%, var(--bg-elevated));
+	}
+</style>

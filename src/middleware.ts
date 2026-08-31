@@ -1,5 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
 import { applySecurityHeaders } from './lib/security-headers.js';
+import { isCrawler, localeRedirectTarget, preferredLocale } from './lib/locale-redirect';
 
 function isBrandStudioPage(pathname: string): boolean {
 	return pathname === '/brand-studio' || pathname === '/brand-studio/';
@@ -26,6 +27,29 @@ export const onRequest = defineMiddleware(async (context, next) => {
 					'X-Robots-Tag': 'noindex, nofollow',
 				},
 			});
+		}
+	}
+
+	const ua = context.request.headers.get('user-agent');
+	if (!isCrawler(ua)) {
+		const redirectPath = localeRedirectTarget(
+			context.url.pathname,
+			context.request.headers.get('accept-language'),
+			context.request.headers.get('cookie'),
+		);
+		if (redirectPath) {
+			const target = new URL(redirectPath + context.url.search, context.url);
+			const locale = preferredLocale(
+				context.request.headers.get('accept-language'),
+				context.request.headers.get('cookie'),
+			);
+			const headers = new Headers({
+				Location: target.toString(),
+				'Cache-Control': 'no-store',
+				'Set-Cookie': `fc_locale=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`,
+			});
+			applySecurityHeaders(headers);
+			return new Response(null, { status: 302, headers });
 		}
 	}
 

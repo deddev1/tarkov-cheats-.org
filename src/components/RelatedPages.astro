@@ -1,0 +1,67 @@
+---
+import { getRelatedPillarLinks } from '../data/internal-links';
+import type { PageId } from '../data/i18n/content.generated';
+import type { LocaleCode } from '../data/i18n/locales';
+import { getT } from '../i18n/server';
+
+interface Props {
+	pageId: PageId;
+	locale: LocaleCode;
+	title?: string;
+}
+
+const { pageId, locale, title } = Astro.props;
+const t = getT(locale);
+const links = getRelatedPillarLinks(pageId, locale);
+const heading = title ?? t('common.relatedPages');
+---
+
+{
+	links.length > 0 && (
+		<section class="related-pages card-panel" aria-labelledby={`related-${pageId}`}>
+			<h2 id={`related-${pageId}`}>{heading}</h2>
+			<ul class="related-pages__list">
+				{links.map((link) => (
+					<li>
+						<a href={link.href}>{link.label}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}
+
+<style>
+	.related-pages__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 0.85rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.related-pages__list a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.15rem;
+		padding: 0.35rem 0.85rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-pill);
+		background: var(--bg-elevated);
+		font-size: 0.8125rem;
+		font-weight: 600;
+		color: var(--ink-muted);
+		text-decoration: none;
+		transition:
+			color 0.15s ease,
+			border-color 0.15s ease,
+			background 0.15s ease;
+	}
+
+	.related-pages__list a:hover {
+		color: var(--magenta-soft);
+		border-color: color-mix(in srgb, var(--magenta) 40%, var(--line));
+		background: color-mix(in srgb, var(--magenta) 8%, var(--bg-elevated));
+	}
+</style>

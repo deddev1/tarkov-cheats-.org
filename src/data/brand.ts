@@ -40,12 +40,20 @@ export const brand = {
 	 * Edit in Brand Studio → Colors (tones are fully customizable).
 	 */
 	theme: {
-		accent: '#5311ee',
-		bg: '#0a0811',
-		soft: '#c3aef4',
-		deep: '#4907df',
-		hover: '#a07bf4',
-		panel: '#0a080c',
+		accent: '#C6A15B',
+		bg: '#0A0B0A',
+		soft: '#D8B86A',
+		deep: '#756039',
+		hover: '#D8B86A',
+		panel: '#121513',
+		elevated: '#191D1A',
+		ink: '#FFFFFF',
+		inkMuted: '#E8EBE8',
+		inkFaint: '#C5CBC6',
+		line: '#303530',
+		input: '#0E110F',
+		ok: '#78A66A',
+		warn: '#B85C50',
 	},
 
 	/**
@@ -57,10 +65,10 @@ export const brand = {
 		list: [
 			'tarkov cheats',
 			'escape from tarkov cheats',
+			'eft cheats',
 			'tarkov esp',
 			'tarkov aimbot',
 			'tarkov wallhack',
-			'tarkov hacks',
 			'undetected tarkov cheats',
 			'best tarkov cheats',
 		] as const,
@@ -73,22 +81,22 @@ export const brand = {
 	seo: {
 		/** Titles ≤60 chars; descriptions ~140–160 (Google SERP display). */
 		/** Home = brand hub. Money URL /tarkov-cheats/ owns the head term. */
-		homeTitle: 'Tarkov Cheats | Official Windows PC Site',
+		homeTitle: 'Tarkov Cheats | Features, Store & Status',
 		homeDescription:
-			'Official Tarkov Cheats site for Windows PC. Compare features, store plans, and live status — then buy ESP, soft aim, and radar in one license.',
-		featuresTitle: '{game} Features | {brand}',
+			'Compare Tarkov Cheats features, store plans, and live BattlEye status for Escape from Tarkov on Windows PC. ESP, soft aim, and radar in one license.',
+		featuresTitle: 'Tarkov ESP & Aimbot Features | {brand}',
 		featuresDescription:
-			'Everything in one {game} license for Windows PC — ESP, soft aim, radar, loot tools, and patch updates after {antiCheat}. See what is included.',
-		storeTitle: '{game} Store | {brand}',
+			'See what is in one {game} license on Windows PC: ESP wallhack, soft aim, 2D radar, loot tools, and {antiCheat} patch updates.',
+		storeTitle: 'Tarkov Cheats Store | Monthly & Lifetime',
 		storeDescription:
-			'Monthly and lifetime {game} plans for Windows PC. Same ESP, aimbot, and radar features on both. Instant delivery after payment checkout.',
-		statusTitle: '{game} Status | {brand}',
+			'Buy tarkov cheats plans for Windows PC. Monthly $35 or lifetime $150. Same ESP, aimbot, and radar on both. Digital delivery after checkout.',
+		statusTitle: 'Tarkov Cheats Status | {antiCheat} Updates',
 		statusDescription:
-			'Live undetected status for {brand} after {game} or {antiCheat} patches. Check here before you queue a raid on Windows PC today.',
+			'Live undetected status for {brand} after {game} or {antiCheat} patches. Check this page before you queue a raid on Windows PC.',
 		/** Money page meta — primary target for "tarkov cheats". */
-		previewTitle: 'Tarkov Cheats | Undetected ESP & Aimbot',
+		previewTitle: 'Tarkov Cheats | EFT ESP, Aimbot & Radar',
 		previewDescription:
-			'Buy undetected tarkov cheats for Escape from Tarkov on Windows PC. ESP, soft aim, radar, and BattlEye patch updates in one license with instant delivery.',
+			'Buy undetected tarkov cheats for Escape from Tarkov on Windows PC. ESP, aimbot, radar, and BattlEye rebuilds in one license with instant delivery.',
 		setupTitle: '{game} Setup | {brand}',
 		setupDescription:
 			'Install and launch {brand} on Windows PC after checkout. Short setup steps so you can raid faster. Follow each step in order before your first match.',
@@ -100,7 +108,7 @@ export const brand = {
 			'Short answers about {brand} for Escape from Tarkov — delivery, setup, {antiCheat} updates, refunds, and Windows PC system notes before you buy.',
 		reviewsTitle: '{brand} Reviews | Buyer Feedback',
 		reviewsDescription:
-			'Buyer reviews for {brand} — ESP, soft aim, radar, and patch updates for Escape from Tarkov on Windows PC. Real feedback from license holders.',
+			'Buyer reviews for {brand} — map-specific notes on ESP, soft aim, radar, and support on Windows PC.',
 		blogTitle: '{game} Intel | {brand}',
 		blogDescription:
 			'Guides and notes for {game} — raid tips, ESP, aimbot, loot routes, and {antiCheat} update coverage for Windows PC players who raid.',
@@ -123,7 +131,7 @@ export const brand = {
 		setupIntro: 'Install {brand} on Windows PC after you buy. Follow these short steps.',
 		supportIntro: 'Need help with {brand}? Email {email} with your order ID.',
 		faqIntro: 'Short answers about delivery, setup, updates, and refunds.',
-		reviewsIntro: 'Feedback from {brand} buyers — ESP, soft aim, radar, and support.',
+		reviewsIntro: 'Recent notes from buyers after PMC raids and Scav runs on Windows PC.',
 		chipEsp: 'ESP / wallhack',
 		chipAim: 'Soft aim',
 		chipRadar: '2D radar',

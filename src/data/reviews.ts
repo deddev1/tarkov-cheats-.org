@@ -1,4 +1,4 @@
-import { customerReviews, siteConfig } from './site';
+import { customerReviews, fillBrandTokens, siteConfig } from './site';
 import { reviewsSitemapImageMeta } from './brand-sitemap';
 import { absoluteImageUrl, crawlPhotoMeta, defaultCrawlImageSrc } from './page-images';
 
@@ -13,7 +13,7 @@ export function absoluteReviewUrl(slug?: string): string {
 }
 
 export function getReviewCrawlImage(slug: string, handle: string, caption: string) {
-	return crawlPhotoMeta(slug, `Tarkov Cheats review by @${handle}`, caption);
+	return crawlPhotoMeta(slug, fillBrandTokens(`Review by @${handle}`), caption);
 }
 
 /** English review routes for sitemap-en.xml — /reviews/ index + one URL per review. */

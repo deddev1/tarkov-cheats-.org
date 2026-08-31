@@ -4,8 +4,8 @@
   "description": "Undetected tarkov cheats — ESP, aimbot, and radar for PC",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0811",
-  "theme_color": "#0a0811",
+  "background_color": "#0A0B0A",
+  "theme_color": "#0A0B0A",
   "icons": [
     {
       "src": "/favicon.png",

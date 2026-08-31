@@ -126,7 +126,11 @@
     "aboutUndetected": "estado indetectable",
     "aboutP2Mid": ", ",
     "aboutP2Or": ", o ",
-    "aboutP2After": " si aún estás comparando herramientas."
+    "aboutP2After": " si aún estás comparando herramientas.",
+    "aboutStore": "Tienda",
+    "aboutStatus": "Estado",
+    "videoCaption": "Tarkov Cheats — ESP, aimbot y radar en partida",
+    "playVideo": "Reproducir vídeo de Tarkov Cheats"
   },
   "homeSeo": {
     "eyebrow": "Guías",
@@ -226,5 +230,108 @@
     "highlightAimbotCopy": "Ajusta suavidad, prioridad de objetivo y teclas para AR, SMG y francotirador antes de comprar.",
     "updatesLabel": "Actualizaciones Tarkov Cheats",
     "updatesShort": "Actualizaciones"
+  },
+  "homeResources": {
+    "title": "Guías y recursos oficiales del juego",
+    "lede": "Enlazamos fuentes de confianza para que puedas verificar parches, mapas y noticias de la comunidad fuera de nuestro sitio.",
+    "officialTitle": "Sitio web oficial de Escape from Tarkov",
+    "officialDesc": "Resumen del juego, opciones de compra y herramientas de cuenta de Battlestate Games.",
+    "patchTitle": "Parches y noticias de Tarkov",
+    "patchDesc": "Lee las actualizaciones oficiales antes de cambiar tu equipamiento o entrar en raid.",
+    "wikiTitle": "Wiki de Escape from Tarkov",
+    "wikiDesc": "Mapas, botín, misiones y datos de objetos mantenidos por la comunidad.",
+    "communityTitle": "Hub de la comunidad Tarkov",
+    "communityDesc": "Anuncios, historias de raid y debates en r/EscapefromTarkov."
+  },
+  "homeFeatures": {
+    "title": "funciones trucos tarkov",
+    "lede": "Todo incluido para raids PMC, Scav runs y Labs en PC Windows.",
+    "badgeWindows": "Windows 10/11",
+    "badgeCpu": "Intel/AMD",
+    "combatTitle": "Soft aim y armas",
+    "espTitle": "ESP y lectura de botín",
+    "radarTitle": "Radar y herramientas de extracto",
+    "cta": "Funciones — desglose completo y explicaciones",
+    "eyebrow": "Una licencia",
+    "badgeBattleye": "BattlEye mantenido",
+    "combatTag": "Dorms · Factory · Customs",
+    "espTag": "Shoreline · Lighthouse · Labs",
+    "radarTag": "Streets · Woods · Interchange",
+    "combat": [
+      "Soft aim for Dorms & Factory CQB",
+      "Smoothing slider — less robotic on kill cams",
+      "FOV arc tuned for 1080p & 1440p",
+      "Bone priority: head / thorax / legs",
+      "Per-weapon profiles (SMG vs DMR)",
+      "Recoil control on full-auto kits",
+      "Hotkey toggle mid-raid",
+      "Line-of-sight check before lock",
+      "Bolt-action preset for Woods snipes",
+      "Stream-friendly overlay toggle"
+    ],
+    "esp": [
+      "PMC & Scav boxes on Customs",
+      "Distance tags for Resort pushes",
+      "Loot filters — ledx, gpu, keycards",
+      "Extract & transit markers",
+      "Boss tags: Killa, Tagilla, Glukhar",
+      "Container & corpse highlights",
+      "Grenade & mine warnings in corridors",
+      "Scav-run friendly faction colors",
+      "Max ESP range per map",
+      "Category toggles before you load in"
+    ],
+    "radar": [
+      "2D radar for off-screen PMCs",
+      "Third-party blips near extract",
+      "Streets & Interchange flank cues",
+      "Raid timer & queue status HUD",
+      "High-value loot pings",
+      "Quest item markers",
+      "Scav-run quick presets",
+      "Profile save per account",
+      "BattlEye rebuild alerts",
+      "In-game mod menu",
+      "Custom crosshair overlay",
+      "Works on Labs & Ground Zero"
+    ]
+  },
+  "homeFaq": {
+    "what-are-tarkov-cheats": {
+      "question": "¿Qué es Tarkov Cheats?",
+      "answer": "Una licencia para ESP, radar y aimbot en PC Windows, con reconstrucciones BattlEye tras los parches."
+    },
+    "are-tarkov-cheats-undetected-in-2026": {
+      "question": "¿Los trucos de Tarkov están indetectables en 2026?",
+      "answer": "Tarkov Cheats se mantiene para Escape from Tarkov con reconstrucciones tras parches de BattlEye y del juego. Mira Estado antes de entrar. Ningún cheat garantiza indetectable permanente."
+    },
+    "pmc-raids-and-scav-runs": {
+      "question": "¿Funciona en raids PMC y Scav runs?",
+      "answer": "Sí. ESP, radar y aimbot están pensados para el flujo de raid de Escape from Tarkov: PMC, Scavs, loot y extracts."
+    },
+    "esp-wallhack-radar-or-aimbot": {
+      "question": "¿Qué incluye — ESP, wallhack, radar o Aimbot?",
+      "answer": "Tarkov Cheats incluye ESP wallhack, marcadores de loot, radar 2D y Aimbot configurable en una licencia. Ver Funciones."
+    },
+    "how-are-licenses-delivered": {
+      "question": "¿Cómo se entregan las licencias?",
+      "answer": "Tras confirmar el pago, los datos de licencia se envían por digital en el checkout. El tiempo puede variar según el método de pago."
+    },
+    "where-to-check-updates": {
+      "question": "¿Dónde veo actualizaciones tras un parche de Escape from Tarkov o BattlEye?",
+      "answer": "Las notas de mantenimiento están en la página Estado cuando un parche afecta el paquete."
+    },
+    "how-to-contact-support": {
+      "question": "¿Cómo contacto con soporte?",
+      "answer": "Usa la página Soporte o escribe a support@tarkovcheats.org. Incluye los datos de tu pedido."
+    }
+  },
+  "homeOffer": {
+    "undetected": "Undetected",
+    "mostPopular": "Most popular",
+    "oneTime": "One-time payment",
+    "easy": "Easy to use",
+    "undetectedShort": "Undetected",
+    "backed": "Your purchase is backed by continuous BattlEye updates and dedicated support after every Tarkov patch."
   }
 }

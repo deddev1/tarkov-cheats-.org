@@ -27,7 +27,7 @@ const copyDefaults = {
 	setupIntro: 'Install {brand} on Windows PC after you buy. Follow these short steps.',
 	supportIntro: 'Need help with {brand}? Email {email} with your order ID.',
 	faqIntro: 'Short answers about delivery, setup, updates, and refunds.',
-	reviewsIntro: 'Real feedback from {brand} buyers — ESP, soft aim, radar, and support.',
+	reviewsIntro: 'Unfiltered notes from buyers after PMC raids and Scav runs on Windows PC.',
 	chipEsp: 'ESP / wallhack',
 	chipAim: 'Soft aim',
 	chipRadar: '2D radar',
@@ -62,7 +62,7 @@ const seoDefaults = {
 	faqDescription: 'Short answers about {brand} — delivery, setup, updates, and refunds.',
 	reviewsTitle: '{brand} Reviews | Buyer Feedback',
 	reviewsDescription:
-		'Real buyer reviews for {brand} — ESP, soft aim, radar, and patch updates on Windows PC.',
+		'Buyer reviews for {brand} — map-specific notes on ESP, soft aim, radar, and support on Windows PC.',
 	blogTitle: '{game} Intel | {brand}',
 	blogDescription: 'Guides and notes for {game} — meta tips, ESP, aimbot, and {antiCheat} updates.',
 } as const;

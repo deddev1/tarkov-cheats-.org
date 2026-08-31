@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"sync:brand": "node scripts/sync-brand.mjs && node scripts/sync-cannibal-redirects.mjs",
-		"prebuild": "node scripts/log-build-info.mjs && node scripts/sync-brand.mjs && node scripts/sync-cannibal-redirects.mjs && node scripts/validate-cloudflare-redirects.mjs",
+		"generate:locales": "node scripts/generate-locale-json.mjs",
+		"prebuild": "node scripts/log-build-info.mjs && node scripts/sync-brand.mjs && node scripts/sync-cannibal-redirects.mjs && node scripts/generate-locale-json.mjs && node scripts/validate-cloudflare-redirects.mjs",
 		"build": "astro build",
 		"postbuild": "node scripts/strip-brand-studio.mjs && node scripts/validate-cloudflare-redirects.mjs",
 		"build:validate": "npm run sync:brand && astro build && node scripts/strip-brand-studio.mjs && npm run validate:sitemaps",

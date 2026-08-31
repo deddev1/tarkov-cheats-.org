@@ -2,7 +2,7 @@ import { siteConfig } from './site';
 
 /** Screenshots used across product pages — simple tarkov cheats keyword alts. */
 export const tarkovImages = {
-	hero: '/images/tarkov-cheats-hero-full.png',
+	hero: '/images/tarkov-cheats-hero-1024w.webp',
 	espWallhack: '/images/tarkov-cheats-wallhack.webp',
 	aimbotCombat: '/images/tarkov-cheats-aimbot.webp',
 	aimbotSkeleton: '/images/tarkov-cheats-aimbot-view.webp',

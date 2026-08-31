@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n.js';
 
 export type LocaleMeta = {
 	code: string;
@@ -54,6 +55,7 @@ export default function LanguageSwitcher({ currentLocale, locales, hrefForLocale
 									data-locale={locale.code}
 									onClick={() => {
 										document.cookie = `fc_locale=${locale.code};path=/;max-age=31536000;SameSite=Lax`;
+										void i18n.changeLanguage(locale.code);
 									}}
 								>
 									<span className="lang-switcher__native">{locale.nativeName}</span>

@@ -4,7 +4,10 @@ import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import HomeReviews from '../components/HomeReviews.astro';
 import HomeSeo from '../components/HomeSeo.astro';
-import HomeAboutApp from '../components/react/HomeAbout';
+import HomeAbout from '../components/HomeAbout.astro';
+import HomeFeatureCards from '../components/HomeFeatureCards.astro';
+import HomeProductOffer from '../components/HomeProductOffer.astro';
+import CategoryRow from '../components/CategoryRow.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getLocaleContent, getPageContent } from '../data/i18n';
 import { getLocalizedPath } from '../data/i18n/routing';
@@ -106,31 +109,11 @@ const extraGraph: Record<string, unknown>[] = [
 	<main class="home">
 		<Hero locale={locale} />
 		<HomeReviews locale={locale} />
-		<div class="home__seo">
-			{
-				locale === 'en' ? (
-					<>
-						<HomeAboutApp client:visible locale={locale} />
-						<HomeSeo locale={locale} />
-					</>
-				) : (
-					<div class="shell home__prose">
-						<h2>{home.h1}</h2>
-						<p>{home.intro}</p>
-						{
-							home.sections.map((section) => (
-								<div>
-									<h3>{section.h2}</h3>
-									{section.paragraphs.map((p) => (
-										<p set:html={p} />
-									))}
-								</div>
-							))
-						}
-					</div>
-				)
-			}
-		</div>
+		<HomeAbout locale={locale} />
+		<HomeFeatureCards locale={locale} />
+		<HomeProductOffer locale={locale} />
+		<HomeSeo locale={locale} faqOnly />
+		<CategoryRow locale={locale} />
 		<SiteFooter locale={locale} />
 	</main>
 </Layout>
@@ -139,13 +122,9 @@ const extraGraph: Record<string, unknown>[] = [
 	.home {
 		width: 100%;
 		overflow-x: clip;
-	}
-
-	.home__seo {
-		border-top: 1px solid var(--line-soft);
-		background: var(--bg-panel);
-		content-visibility: auto;
-		contain-intrinsic-size: 1px 900px;
+		--home-y: clamp(2.5rem, 4.2vw, 3.5rem);
+		--home-h2: clamp(1.45rem, 2.2vw, 1.75rem);
+		--home-eyebrow: 0.72rem;
 	}
 
 	.home__prose {
@@ -153,21 +132,6 @@ const extraGraph: Record<string, unknown>[] = [
 		color: var(--ink-muted);
 		line-height: 1.65;
 		font-size: 0.9375rem;
-	}
-
-	.home__prose--en {
-		padding-block: clamp(2rem, 4vw, 2.75rem) 0.5rem;
-		border-bottom: 1px solid var(--line-soft);
-	}
-
-	.home__prose--en a {
-		color: var(--magenta-soft);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.home__prose--en a:hover {
-		color: var(--ink);
 	}
 
 	.home__prose h2 {

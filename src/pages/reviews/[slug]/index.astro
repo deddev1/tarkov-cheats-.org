@@ -5,7 +5,13 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import { customerReviewStats, customerReviews, productInfo, siteConfig } from '../../../data/site';
 import { getSelfHreflangAlternates } from '../../../data/i18n/routing';
 import { getReviewPath, getReviewCrawlImage, reviewsBasePath } from '../../../data/reviews';
+import { pickCrawlPhoto } from '../../../data/page-images';
+import { tarkovImages } from '../../../data/tarkov';
+import { getRelatedPillarLinks } from '../../../data/internal-links';
+import PillarLinks from '../../../components/PillarLinks.astro';
+import ReviewStars from '../../../components/ReviewStars.astro';
 import type { CustomerReview } from '../../../data/site';
+import { brandCopy } from '../../../data/site-core';
 import { contentSrcSet, productMainSizes } from '../../../lib/responsive-images';
 
 export function getStaticPaths() {
@@ -21,9 +27,10 @@ const canonicalPath = getReviewPath(review.slug);
 const canonicalURL = new URL(canonicalPath, siteConfig.url).href;
 const hreflangAlternates = getSelfHreflangAlternates(canonicalPath);
 const photo = getReviewCrawlImage(review.slug, review.handle, review.seoDescription);
+const buyLabel = `${brandCopy.ctaBuy} — $${productInfo.plans[0].price}`;
 
-function stars(rating: number): string {
-	return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+function reviewTitle(item: CustomerReview): string {
+	return item.tag ? `${item.tag} — @${item.handle}` : `@${item.handle}`;
 }
 
 const dateLabel = new Intl.DateTimeFormat('en', {
@@ -38,6 +45,7 @@ const currentIndex = customerReviews.findIndex((r) => r.slug === review.slug);
 const moreReviews = [1, 2, 3].map(
 	(offset) => customerReviews[(currentIndex + offset) % customerReviews.length],
 );
+const exploreLinks = getRelatedPillarLinks('hacks');
 
 const priceValidUntil = '2027-12-31';
 const offerPrices = productInfo.plans.map((plan) => plan.price);
@@ -96,7 +104,7 @@ const extraGraph: Record<string, unknown>[] = [
 	canonicalPath={canonicalPath}
 	hreflangAlternates={hreflangAlternates}
 	ogImage={photo.src}
-	ogImageAlt={`${siteConfig.name} review by @${review.handle}`}
+	ogImageAlt={`Review by @${review.handle}`}
 	type="article"
 	locale="en"
 	breadcrumbs={[
@@ -124,26 +132,34 @@ const extraGraph: Record<string, unknown>[] = [
 						src={photo.src}
 						srcset={contentSrcSet(photo.src)}
 						sizes={productMainSizes}
-						alt={`${siteConfig.name} review by @${review.handle}`}
+						alt={`In-raid gameplay from review by @${review.handle}`}
 						width="1280"
-						height="720"
+						height="580"
 						loading="eager"
 						decoding="async"
 						fetchpriority="high"
 					/>
 				</figure>
+				<ul class="review-detail__thumbs" aria-label="Gameplay screenshots">
+					{
+						tarkovImages.gallery.slice(0, 4).map((shot) => (
+							<li>
+								<img src={shot.src} alt={shot.alt} width="200" height="112" loading="lazy" decoding="async" />
+							</li>
+						))
+					}
+				</ul>
 				<header class="review-detail__head">
 					<span class="review-detail__avatar" aria-hidden="true">{review.handle.charAt(0).toUpperCase()}</span>
 					<div class="review-detail__meta">
-						<h1 class="review-detail__title">{siteConfig.name} review by @{review.handle}</h1>
+						<h1 class="review-detail__title">{reviewTitle(review)}</h1>
 						<p class="review-detail__stars" aria-label={`${review.rating} out of 5 stars`}>
-							<span aria-hidden="true">{stars(review.rating)}</span>
+							<ReviewStars rating={review.rating} />
 							<span class="review-detail__rating">{review.rating}/5</span>
 						</p>
 						<p class="review-detail__date">
 							<time datetime={review.date}>{dateLabel}</time>
 							{review.tag ? <span class="review-detail__tag">{review.tag}</span> : null}
-							<span class="review-detail__verified">Verified buyer</span>
 						</p>
 					</div>
 				</header>
@@ -154,11 +170,14 @@ const extraGraph: Record<string, unknown>[] = [
 
 				<div class="review-detail__ctas">
 					<a href={siteConfig.checkoutUrl} class="review-detail__buy" rel="noopener noreferrer">
-						Buy {siteConfig.name} — ${productInfo.plans[0].price}
+						{buyLabel}
 					</a>
 					<a href="/pricing/" class="review-detail__link-btn">Compare pricing</a>
-					<a href="/" class="review-detail__link-btn">{siteConfig.name} home</a>
+					<a href="/features/" class="review-detail__link-btn">{brandCopy.navFeatures}</a>
+					<a href="/setup/" class="review-detail__link-btn">Setup</a>
 				</div>
+
+				<PillarLinks links={exploreLinks} title="Explore product pages" />
 			</article>
 
 			<section class="review-detail__more" aria-labelledby="more-reviews-title">
@@ -167,10 +186,19 @@ const extraGraph: Record<string, unknown>[] = [
 					{
 						moreReviews.map((other) => (
 							<a class="review-detail__more-card" href={getReviewPath(other.slug)}>
+								<img
+									class="review-detail__more-shot"
+									src={pickCrawlPhoto(other.slug)}
+									alt=""
+									width="280"
+									height="120"
+									loading="lazy"
+									decoding="async"
+								/>
 								<span class="review-detail__more-top">
 									<span class="review-detail__more-handle">@{other.handle}</span>
 									<span class="review-detail__more-stars" aria-label={`${other.rating} out of 5 stars`}>
-										{stars(other.rating)}
+										<ReviewStars rating={other.rating} class="review-stars--card" />
 									</span>
 								</span>
 								<span class="review-detail__more-text">{other.short}</span>
@@ -179,7 +207,7 @@ const extraGraph: Record<string, unknown>[] = [
 					}
 				</div>
 				<p class="review-detail__all-link">
-					<a href={reviewsBasePath}>All {customerReviewStats.totalCount} {siteConfig.name} reviews</a>
+					<a href={reviewsBasePath}>All {customerReviewStats.totalCount} reviews</a>
 				</p>
 			</section>
 			</div>
@@ -241,8 +269,27 @@ const extraGraph: Record<string, unknown>[] = [
 		display: block;
 		width: 100%;
 		height: auto;
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 2.2 / 1;
 		object-fit: cover;
+	}
+
+	.review-detail__thumbs {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.45rem;
+		margin: -0.65rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.review-detail__thumbs img {
+		display: block;
+		width: 100%;
+		height: 3.6rem;
+		object-fit: cover;
+		border-radius: 8px;
+		border: 1px solid var(--line);
+		background: var(--bg-elevated);
 	}
 
 	.review-detail__head {
@@ -289,9 +336,6 @@ const extraGraph: Record<string, unknown>[] = [
 		display: flex;
 		align-items: center;
 		gap: 0.55rem;
-		font-size: 1.05rem;
-		letter-spacing: 0.06em;
-		color: var(--accent-amber);
 	}
 
 	.review-detail__rating {
@@ -311,8 +355,7 @@ const extraGraph: Record<string, unknown>[] = [
 		color: var(--ink-faint);
 	}
 
-	.review-detail__tag,
-	.review-detail__verified {
+	.review-detail__tag {
 		display: inline-flex;
 		padding: 0.2rem 0.55rem;
 		border-radius: 999px;
@@ -320,18 +363,9 @@ const extraGraph: Record<string, unknown>[] = [
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-	}
-
-	.review-detail__tag {
 		border: 1px solid color-mix(in srgb, var(--magenta) 28%, var(--line));
 		background: var(--bg);
 		color: var(--magenta-soft);
-	}
-
-	.review-detail__verified {
-		border: 1px solid color-mix(in srgb, var(--ok) 35%, var(--line));
-		background: var(--bg);
-		color: var(--ok);
 	}
 
 	.review-detail__body {
@@ -421,7 +455,8 @@ const extraGraph: Record<string, unknown>[] = [
 	.review-detail__more-card {
 		display: grid;
 		gap: 0.45rem;
-		padding: 0.9rem 0.95rem;
+		padding: 0;
+		overflow: hidden;
 		border-radius: var(--radius-md, 0.75rem);
 		border: 1px solid var(--line);
 		background: var(--bg-panel);
@@ -430,6 +465,27 @@ const extraGraph: Record<string, unknown>[] = [
 		transition:
 			border-color 0.2s ease,
 			transform 0.2s ease;
+	}
+
+	.review-detail__more-shot {
+		display: block;
+		width: 100%;
+		height: 4.5rem;
+		object-fit: cover;
+		background: var(--bg-elevated);
+	}
+
+	.review-detail__more-top,
+	.review-detail__more-text {
+		margin-inline: 0.9rem;
+	}
+
+	.review-detail__more-top {
+		margin-top: 0.65rem;
+	}
+
+	.review-detail__more-text {
+		margin-bottom: 0.85rem;
 	}
 
 	.review-detail__more-card:hover {

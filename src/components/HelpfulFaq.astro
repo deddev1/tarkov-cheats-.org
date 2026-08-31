@@ -1,0 +1,99 @@
+---
+import type { FaqItem } from '../data/site';
+import { getFaqPath } from '../data/faq';
+import { localizeInternalHref } from '../data/i18n/routing';
+import type { LocaleCode } from '../data/i18n/locales';
+import { getT } from '../i18n/server';
+
+interface Props {
+	items: readonly FaqItem[];
+	locale: LocaleCode;
+}
+
+const { items, locale } = Astro.props;
+const t = getT(locale);
+const allHref = localizeInternalHref('/faq/', locale);
+
+function copy(item: FaqItem, field: 'question' | 'answer') {
+	const key = `homeFaq.${item.slug}.${field}`;
+	const value = t(key);
+	return value === key ? item[field] : value;
+}
+---
+
+{
+	items.length > 0 && (
+		<section class="helpful-faq card-panel" aria-labelledby="helpful-faq-title">
+			<div class="helpful-faq__head">
+				<h2 id="helpful-faq-title">{t('common.helpfulFaq')}</h2>
+				<a href={allHref}>{t('homeSeo.allAnswers')}</a>
+			</div>
+			<div class="helpful-faq__list">
+				{items.map((item) => (
+					<details>
+						<summary>{copy(item, 'question')}</summary>
+						<p>{copy(item, 'answer')}</p>
+						<a href={localizeInternalHref(getFaqPath(item.slug), locale)}>{t('homeSeo.openFullPage')}</a>
+					</details>
+				))}
+			</div>
+		</section>
+	)
+}
+
+<style>
+	.helpful-faq__head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.helpful-faq__head a {
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.helpful-faq__list {
+		display: grid;
+		gap: 0.45rem;
+		margin-top: 0.9rem;
+	}
+
+	.helpful-faq details {
+		border: 1px solid var(--line);
+		border-radius: var(--radius-md, 0.75rem);
+		background: var(--bg-elevated);
+		padding: 0.15rem 0.9rem 0.15rem;
+	}
+
+	.helpful-faq summary {
+		cursor: pointer;
+		list-style: none;
+		padding: 0.75rem 0;
+		font-weight: 650;
+	}
+
+	.helpful-faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.helpful-faq details p {
+		margin: 0 0 0.55rem;
+		color: var(--ink-muted);
+		font-size: 0.92rem;
+		line-height: 1.5;
+	}
+
+	.helpful-faq details > a {
+		display: inline-block;
+		margin-bottom: 0.85rem;
+		font-size: 0.82rem;
+		font-weight: 700;
+		color: var(--accent);
+		text-decoration: none;
+	}
+</style>

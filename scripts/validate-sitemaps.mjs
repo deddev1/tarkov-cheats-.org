@@ -71,7 +71,7 @@ const ENGLISH_HTML_PAGES = 25 + BLOG_PAGES + REVIEW_PAGES + FAQ_PAGES;
 const LOCALE_BLOG_REDIRECT_PAGES = 18;
 const TOTAL_HTML_PAGES =
 	ENGLISH_HTML_PAGES + I18N_LOCALES * (PRODUCT_PAGES_PER_LOCALE + LOCALE_BLOG_REDIRECT_PAGES);
-const HREFLANG_PER_URL = 23;
+const HREFLANG_PER_URL = 29;
 const SITEMAP_INDEX_ENTRIES = 1 + I18N_LOCALES + 1; // EN + locales + images
 
 /** Built HTML that intentionally 301s — allowed to be absent from sitemaps */
@@ -396,7 +396,7 @@ async function main() {
 	if (homeHreflang !== HREFLANG_PER_URL) {
 		fail(`Homepage hreflang links: expected ${HREFLANG_PER_URL}, got ${homeHreflang}`);
 		bump();
-	} else ok(`Homepage has ${HREFLANG_PER_URL} hreflang alternates (22 locales + x-default)`);
+	} else ok(`Homepage has ${HREFLANG_PER_URL} hreflang alternates (22 locales + regional tags + x-default)`);
 
 	// sitemap.xml index — EN + 21 locale sitemaps + images
 	if (indexLocs.length !== SITEMAP_INDEX_ENTRIES) {

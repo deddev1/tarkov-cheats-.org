@@ -22,6 +22,7 @@ function redirectResponse(target: string, status = 301): Response {
 		'Cache-Control': 'no-store',
 		'CDN-Cache-Control': 'no-store',
 		'Cloudflare-CDN-Cache-Control': 'no-store',
+		'X-Robots-Tag': 'noindex, follow',
 	});
 	applySecurityHeaders(headers);
 	return new Response(null, { status, headers });

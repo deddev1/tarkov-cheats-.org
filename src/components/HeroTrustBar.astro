@@ -1,0 +1,105 @@
+---
+import { defaultLocale, type LocaleCode } from '../data/i18n/locales';
+import { siteConfig } from '../data/site';
+import { getT } from '../i18n/server';
+
+interface Props {
+	locale?: LocaleCode;
+}
+
+const locale = Astro.props.locale ?? defaultLocale;
+const t = getT(locale);
+
+const items = [t('trust.delivery'), t('trust.platform'), t('trust.antiCheatShort')];
+---
+
+<div class="hero-trust" role="status" aria-label={t('trust.statusNote', { brand: siteConfig.name })}>
+	<div class="shell hero-trust__inner">
+		<span class="hero-trust__status">
+			<span class="hero-trust__dot" aria-hidden="true"></span>
+			{t('trust.status')}
+		</span>
+		{
+			items.map((label) => (
+				<span class="hero-trust__group">
+					<span class="hero-trust__sep" aria-hidden="true">
+						·
+					</span>
+					<span class="hero-trust__item">{label}</span>
+				</span>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.hero-trust {
+		border-bottom: 1px solid color-mix(in srgb, var(--line-soft) 55%, transparent);
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			color-mix(in srgb, var(--bg-elevated) 42%, transparent) 16%,
+			color-mix(in srgb, var(--bg-elevated) 55%, transparent) 50%,
+			color-mix(in srgb, var(--bg-elevated) 42%, transparent) 84%,
+			transparent 100%
+		);
+	}
+
+	.hero-trust__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 0.45rem 0.65rem;
+		padding-block: 0.65rem;
+		font-size: 0.75rem;
+		line-height: 1.35;
+		font-weight: 500;
+		letter-spacing: 0.01em;
+		color: #fff;
+		text-align: center;
+	}
+
+	.hero-trust__status {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--ok);
+		font-weight: 600;
+	}
+
+	.hero-trust__dot {
+		width: 0.42rem;
+		height: 0.42rem;
+		border-radius: 999px;
+		background: currentColor;
+		box-shadow: 0 0 6px color-mix(in srgb, var(--ok) 55%, transparent);
+	}
+
+	.hero-trust__group {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.hero-trust__sep {
+		opacity: 0.45;
+		user-select: none;
+	}
+
+	.hero-trust__item {
+		white-space: nowrap;
+	}
+
+	@media (max-width: 640px) {
+		.hero-trust__inner {
+			justify-content: center;
+			font-size: 0.66rem;
+			row-gap: 0.2rem;
+		}
+
+		.hero-trust__item {
+			white-space: normal;
+		}
+	}
+</style>

@@ -1,0 +1,108 @@
+---
+import { externalResourceLinks } from '../data/external-resources';
+import type { LocaleCode } from '../data/i18n/locales';
+import { getT } from '../i18n/server';
+
+interface Props {
+	locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+---
+
+<section class="home-resources shell" aria-labelledby="home-resources-title">
+	<h2 id="home-resources-title">{t('homeResources.title')}</h2>
+	<p class="home-resources__lede">{t('homeResources.lede')}</p>
+	<ul class="home-resources__list">
+		{
+			externalResourceLinks.map((item) => (
+				<li>
+					<a href={item.href} rel="noopener noreferrer" target="_blank">
+						<span class="home-resources__link-title">{t(item.titleKey)}</span>
+						<span class="home-resources__link-desc">{t(item.descKey)}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<style>
+	.home-resources {
+		margin-top: 2rem;
+		padding-block: 1.5rem;
+		padding-inline: 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+	}
+
+	.home-resources h2 {
+		margin: 0 0 0.5rem;
+		font-family: var(--font-display);
+		font-size: var(--home-h2, clamp(1.45rem, 2.2vw, 1.75rem));
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		line-height: 1.25;
+		color: var(--ink);
+	}
+
+	.home-resources__lede {
+		margin: 0 0 1.1rem;
+		max-width: 42rem;
+		font-size: 0.875rem;
+		line-height: 1.55;
+		color: var(--ink-muted);
+	}
+
+	.home-resources__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.home-resources__list a {
+		display: grid;
+		gap: 0.2rem;
+		padding: 0.95rem 1.05rem;
+		border: 1px solid var(--line-soft);
+		border-radius: var(--radius-md, 0.75rem);
+		background: color-mix(in srgb, var(--bg) 50%, var(--bg-elevated));
+		text-decoration: none;
+		transition:
+			border-color 0.15s ease,
+			background 0.15s ease;
+	}
+
+	.home-resources__list a:hover {
+		border-color: color-mix(in srgb, var(--magenta) 30%, var(--line));
+		background: color-mix(in srgb, var(--magenta) 6%, var(--bg-elevated));
+	}
+
+	.home-resources__link-title {
+		font-size: 0.9375rem;
+		font-weight: 700;
+		line-height: 1.35;
+		color: var(--ink);
+	}
+
+	.home-resources__link-desc {
+		font-size: 0.8125rem;
+		line-height: 1.45;
+		color: var(--ink-muted);
+	}
+
+	@media (max-width: 480px) {
+		.home-resources {
+			margin-top: 1.5rem;
+			padding: 1.1rem 1rem;
+		}
+
+		.home-resources__list a {
+			min-height: var(--touch-min, 2.75rem);
+		}
+	}
+</style>

@@ -40,7 +40,7 @@
   },
   "trust": {
     "status": "Online",
-    "statusNote": "Tarkov Cheats — undetected tarkov cheats live for Tarkov on Windows PC.",
+    "statusNote": "{{brand}} is live for Escape from Tarkov on Windows PC.",
     "statusShort": "Live",
     "delivery": "Instant digital delivery",
     "platform": "Windows 10 & 11",
@@ -66,22 +66,23 @@
   },
   "reviews": {
     "title": "What players say",
-    "subtitle": "Recent feedback from Tarkov Cheats buyers",
+    "subtitle": "Recent notes from buyers after PMC raids",
     "outOf": "out of 5",
     "countLabel": "reviews",
     "eyebrow": "Reviews",
-    "homeTitle": "Tarkov Cheats reviews",
+    "homeTitle": "What players say",
     "buyerReviews": "{{count}} buyer reviews",
     "averageAria": "{{rating}} average from {{count}} reviews",
     "outOfFiveAria": "{{rating}} out of 5",
     "readAll": "Read all reviews →"
   },
   "common": {
-    "buyNow": "Buy Tarkov Cheats",
+    "buyNow": "Get Access",
     "readGuide": "Read guide",
     "language": "Language",
     "officialLanguageNote": "English is official; other locales are translated.",
     "relatedPages": "Related pages",
+    "helpfulFaq": "Helpful FAQ",
     "selectLanguage": "Select language",
     "englishOfficial": "English — official language",
     "englishIsOfficial": "English is the official language",
@@ -114,10 +115,10 @@
   "footer": {
     "explore": "Explore",
     "help": "Help & legal",
-    "tagline": "Undetected Tarkov cheats for PC.\nESP, wallhack, radar & aimbot."
+    "tagline": "Undetected Tarkov cheats for PC.\nESP, soft aim, and radar."
   },
   "home": {
-    "aboutTitle": "Undetected tarkov cheats for Escape from Tarkov",
+    "aboutTitle": "undetected cheats for tarkov",
     "aboutP1": "Tarkov Cheats is an undetected Escape from Tarkov cheat package for Windows PC. One license includes ESP wallhack, soft aim, and 2D radar, with BattlEye rebuilds after game patches. Compare plans on Store, then check Status before you raid.",
     "aboutP2Before": "Start with the",
     "aboutPillar": "tarkov cheats pillar",
@@ -126,7 +127,94 @@
     "aboutUndetected": "undetected status",
     "aboutP2Mid": ", ",
     "aboutP2Or": ", or ",
-    "aboutP2After": " if you are still comparing tools."
+    "aboutP2After": " if you are still comparing tools.",
+    "aboutStore": "Store",
+    "aboutStatus": "Status",
+    "videoCaption": "Tarkov Cheats — ESP, aimbot & radar in match",
+    "playVideo": "Play Tarkov Cheats preview video"
+  },
+  "homeFeatures": {
+    "eyebrow": "One license",
+    "title": "tarkov cheats features",
+    "lede": "ESP, soft aim, and radar built for PMC raids, Scav runs, and Labs on Windows PC — tuned for maps like Customs, Shoreline, and Streets.",
+    "badgeWindows": "Windows 10/11",
+    "badgeCpu": "Intel/AMD",
+    "badgeBattleye": "BattlEye maintained",
+    "combatTitle": "Soft aim & weapons",
+    "combatTag": "Dorms · Factory · Customs",
+    "espTitle": "ESP & loot reads",
+    "espTag": "Shoreline · Lighthouse · Labs",
+    "radarTitle": "Radar & extract tools",
+    "radarTag": "Streets · Woods · Interchange",
+    "cta": "Full features breakdown →",
+    "combat": [
+      "Soft aim for Dorms & Factory CQB",
+      "Smoothing slider — less robotic on kill cams",
+      "FOV arc tuned for 1080p & 1440p",
+      "Bone priority: head / thorax / legs",
+      "Per-weapon profiles (SMG vs DMR)",
+      "Recoil control on full-auto kits",
+      "Hotkey toggle mid-raid",
+      "Line-of-sight check before lock",
+      "Bolt-action preset for Woods snipes",
+      "Stream-friendly overlay toggle"
+    ],
+    "esp": [
+      "PMC & Scav boxes on Customs",
+      "Distance tags for Resort pushes",
+      "Loot filters — ledx, gpu, keycards",
+      "Extract & transit markers",
+      "Boss tags: Killa, Tagilla, Glukhar",
+      "Container & corpse highlights",
+      "Grenade & mine warnings in corridors",
+      "Scav-run friendly faction colors",
+      "Max ESP range per map",
+      "Category toggles before you load in"
+    ],
+    "radar": [
+      "2D radar for off-screen PMCs",
+      "Third-party blips near extract",
+      "Streets & Interchange flank cues",
+      "Raid timer & queue status HUD",
+      "High-value loot pings",
+      "Quest item markers",
+      "Scav-run quick presets",
+      "Profile save per account",
+      "BattlEye rebuild alerts",
+      "In-game mod menu",
+      "Custom crosshair overlay",
+      "Works on Labs & Ground Zero"
+    ]
+  },
+  "homeFaq": {
+    "what-are-tarkov-cheats": {
+      "question": "What is Tarkov Cheats?",
+      "answer": "One license for ESP, radar, and aimbot on Windows PC, with BattlEye rebuilds after patches."
+    },
+    "are-tarkov-cheats-undetected-in-2026": {
+      "question": "Are tarkov cheats undetected in 2026?",
+      "answer": "Tarkov Cheats is maintained for Escape from Tarkov with rebuilds after BattlEye and game patches. Check the Status page before you queue. No cheat can guarantee permanent undetected status — maintenance and responsible use matter."
+    },
+    "pmc-raids-and-scav-runs": {
+      "question": "Does this work in PMC raids and Scav runs?",
+      "answer": "Yes. ESP, radar, and aimbot are built for Escape from Tarkov raid flow — reading PMCs and Scavs, spotting loot, and staying aware near extracts."
+    },
+    "esp-wallhack-radar-or-aimbot": {
+      "question": "What is included — ESP, wallhack, radar, or Aimbot?",
+      "answer": "Tarkov Cheats bundles ESP wallhack, loot markers, 2D radar cues, and configurable Aimbot in one license. See Features for the full list."
+    },
+    "how-are-licenses-delivered": {
+      "question": "How are licenses delivered?",
+      "answer": "After payment is confirmed, Tarkov Cheats license details are delivered digitally through checkout. Timing can vary by payment method and order review."
+    },
+    "where-to-check-updates": {
+      "question": "Where do I check updates after an Escape from Tarkov or BattlEye patch?",
+      "answer": "Maintenance notes are posted on the Status page when an Escape from Tarkov or BattlEye update affects the package."
+    },
+    "how-to-contact-support": {
+      "question": "How do I contact support?",
+      "answer": "Use the Support page or email support@tarkovcheats.org. Include your order details so replies can be faster."
+    }
   },
   "homeSeo": {
     "eyebrow": "Guides",
@@ -162,6 +250,18 @@
     "allAnswers": "All answers",
     "openFullPage": "Open full page"
   },
+  "homeResources": {
+    "title": "Official game guides & resources",
+    "lede": "We link to trusted third-party sources so you can verify patch notes, map info, and community news outside our site.",
+    "officialTitle": "Official Escape from Tarkov website",
+    "officialDesc": "Game overview, purchase options, and account tools from Battlestate Games.",
+    "patchTitle": "Tarkov patch notes & news",
+    "patchDesc": "Read official update posts before you change your loadout or queue a raid.",
+    "wikiTitle": "Escape from Tarkov Wiki",
+    "wikiDesc": "Maps, loot, quests, and item data maintained by the player community.",
+    "communityTitle": "Tarkov community hub",
+    "communityDesc": "Announcements, raid stories, and discussions on r/EscapefromTarkov."
+  },
   "deals": {
     "pricing": "Pricing",
     "chooseLicense": "Choose your license",
@@ -175,6 +275,14 @@
     "instantDelivery": "Instant delivery",
     "secureCheckout": "Secure checkout",
     "support247": "24/7 support"
+  },
+  "homeOffer": {
+    "undetected": "Undetected",
+    "mostPopular": "Most popular",
+    "oneTime": "One-time payment",
+    "easy": "Easy to use",
+    "undetectedShort": "Undetected",
+    "backed": "Your purchase is backed by continuous BattlEye updates and dedicated support after every Tarkov patch."
   },
   "categoryRow": {
     "hacks": "Hacks",

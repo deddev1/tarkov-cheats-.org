@@ -23,6 +23,7 @@ type Props = {
 };
 
 const icons: Record<string, string> = {
+	home: 'M4.5 11.2L12 4.8l7.5 6.4M6.2 10.4V19h4.1v-5.2h3.4V19h4.1v-8.6',
 	hacks:
 		'M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7L12 3.5zm0 2.2L6.8 8.5v6.9L12 18.3l5.2-2.9V8.5L12 5.7z',
 	esp: 'M12 5a7 7 0 100 14 7 7 0 000-14zm0 2.2a4.8 4.8 0 110 9.6 4.8 4.8 0 010-9.6zM12 10.2v2.4l1.8 1.1',
@@ -125,7 +126,7 @@ function NavbarInner({
 					</div>
 					<a
 						href={checkoutUrl}
-						className="site-tools__buy"
+						className="site-tools__buy has-btn-shine"
 						rel="noopener noreferrer"
 						aria-label={t('cta.buyShort')}
 					>
@@ -189,7 +190,7 @@ function NavbarInner({
 									hrefForLocale={hrefForLocale}
 								/>
 							</div>
-							<a href={checkoutUrl} className="site-panel__buy" rel="noopener noreferrer">
+							<a href={checkoutUrl} className="site-panel__buy has-btn-shine" rel="noopener noreferrer">
 								<span data-edit="ctaBuy">{t('cta.buy')}</span>
 							</a>
 						</div>

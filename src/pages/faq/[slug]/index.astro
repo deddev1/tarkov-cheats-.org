@@ -3,7 +3,10 @@ import Layout from '../../../layouts/Layout.astro';
 import Navbar from '../../../components/Navbar.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import { productInfo, seoFaqs, siteConfig, type FaqItem } from '../../../data/site';
+import { brandCopy } from '../../../data/site-core';
 import { absoluteFaqUrl, faqBasePath, getFaqCrawlImage, getFaqPath, getRelatedFaqs } from '../../../data/faq';
+import { getFaqPillarLinks } from '../../../data/internal-links';
+import PillarLinks from '../../../components/PillarLinks.astro';
 import { getSelfHreflangAlternates } from '../../../data/i18n/routing';
 import { contentSrcSet, productMainSizes } from '../../../lib/responsive-images';
 
@@ -20,7 +23,22 @@ const canonicalPath = getFaqPath(faq.slug);
 const canonicalURL = absoluteFaqUrl(faq.slug);
 const hreflangAlternates = getSelfHreflangAlternates(canonicalPath);
 const related = getRelatedFaqs(faq.slug, 4);
+const pillarLinks = getFaqPillarLinks(faq.slug);
 const photo = getFaqCrawlImage(faq);
+const buyLabel = `${brandCopy.ctaBuy} — $${productInfo.plans[0].price}`;
+
+const faqEyebrows: Record<string, string> = {
+	'how-are-licenses-delivered': 'Buying',
+	'buy-undetected-tarkov-cheats-windows-pc': 'Buying',
+	'how-to-contact-support': 'Support',
+	'where-to-check-updates': 'Status',
+	'battleye-anti-cheat-and-tarkov-cheats': 'Status',
+	'are-tarkov-cheats-undetected-in-2026': 'Status',
+};
+const faqEyebrow =
+	faqEyebrows[faq.slug] ??
+	(/esp|aimbot|radar|wallhack/.test(faq.slug) ? 'Features' : 'FAQ');
+const crumbLabel = faq.question.length > 48 ? `${faq.question.slice(0, 45)}…` : faq.question;
 
 const extraGraph: Record<string, unknown>[] = [
 	{
@@ -73,7 +91,7 @@ const extraGraph: Record<string, unknown>[] = [
 				<span aria-hidden="true">/</span>
 				<a href={faqBasePath}>FAQ</a>
 				<span aria-hidden="true">/</span>
-				<span aria-current="page">Answer</span>
+				<span aria-current="page">{crumbLabel}</span>
 			</nav>
 
 			<article class="faq-detail">
@@ -90,7 +108,11 @@ const extraGraph: Record<string, unknown>[] = [
 						fetchpriority="high"
 					/>
 				</figure>
-				<p class="faq-detail__eyebrow">Before you buy</p>
+				{
+					faqEyebrow.toLowerCase() !== 'faq' ? (
+						<p class="faq-detail__eyebrow">{faqEyebrow}</p>
+					) : null
+				}
 				<h1 class="faq-detail__title">{faq.question}</h1>
 				<div class="faq-detail__answer">
 					<p>{faq.answer}</p>
@@ -98,11 +120,13 @@ const extraGraph: Record<string, unknown>[] = [
 
 				<div class="faq-detail__ctas">
 					<a href={siteConfig.checkoutUrl} class="faq-detail__buy" rel="noopener noreferrer">
-						Buy {siteConfig.name} — ${productInfo.plans[0].price}
+						{buyLabel}
 					</a>
 					<a href="/pricing/" class="faq-detail__link">Compare pricing</a>
-					<a href="/support/" class="faq-detail__link">Contact support</a>
+					<a href="/setup/" class="faq-detail__link">Setup</a>
 				</div>
+
+				<PillarLinks links={pillarLinks} title="Related pages" />
 			</article>
 
 			<section class="faq-detail__more" aria-labelledby="more-faq-title">
@@ -225,6 +249,10 @@ const extraGraph: Record<string, unknown>[] = [
 		flex-wrap: wrap;
 		gap: 0.65rem;
 		padding-top: 0.25rem;
+	}
+
+	.faq-detail :global(.pillar-links) {
+		margin-top: 0.35rem;
 	}
 
 	.faq-detail__buy {

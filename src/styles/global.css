@@ -5,26 +5,27 @@
 	--font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
 	--font-display: "Syne Variable", "Syne", ui-sans-serif, sans-serif;
 
-	/* Near-black canvas — Linear / open-source product surface ladder */
-	--bg: #08090a;
-	--bg-panel: #0f1011;
-	--bg-elevated: #161618;
-	--bg-hover: #1c1c1f;
-	--line: #23252a;
-	--line-soft: #1a1b1e;
-	--line-strong: #34343a;
-	--ink: #f5f5f7;
-	--ink-muted: #a1a1aa;
-	--ink-faint: #8b8b93;
+	/* Tarkov canvas — olive-black surface ladder */
+	--bg: #0a0b0a;
+	--bg-panel: #121513;
+	--bg-elevated: #191d1a;
+	--bg-hover: #1f2420;
+	--bg-input: #0e110f;
+	--line: #303530;
+	--line-soft: #252927;
+	--line-strong: #3a4039;
+	--ink: #ffffff;
+	--ink-muted: #e8ebe8;
+	--ink-faint: #c5cbc6;
 
-	/* Single brand accent: magenta (user request) — used sparingly */
-	--magenta: #c026d3;
-	--magenta-soft: #e879f9;
-	--magenta-deep: #86198f;
+	/* Brand accent — warm gold */
+	--magenta: #c6a15b;
+	--magenta-soft: #d8b86a;
+	--magenta-deep: #756039;
 	--accent: var(--magenta);
-	--accent-hover: #d946ef;
-	--ok: #34d399;
-	--warn: #f43f5e;
+	--accent-hover: #d8b86a;
+	--ok: #78a66a;
+	--warn: #b85c50;
 
 	/* Legacy aliases */
 	--tone-void: #050505;
@@ -423,5 +424,61 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	@keyframes btn-shine {
+		from {
+			background-position: 140% 0;
+		}
+		to {
+			background-position: -40% 0;
+		}
+	}
+
+	.has-btn-shine {
+		position: relative;
+		isolation: isolate;
+		transition: box-shadow 0.18s ease;
+	}
+
+	.has-btn-shine::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		pointer-events: none;
+		z-index: 1;
+		background-image: linear-gradient(
+			105deg,
+			transparent 32%,
+			rgb(255 255 255 / 0.42) 50%,
+			transparent 68%
+		);
+		background-size: 220% 100%;
+		background-position: 140% 0;
+		background-repeat: no-repeat;
+	}
+
+	.has-btn-shine:hover::after,
+	.has-btn-shine:focus-visible::after {
+		animation: btn-shine 0.7s ease;
+	}
+
+	.has-btn-shine:active {
+		box-shadow:
+			0 0 0 1px color-mix(in srgb, var(--accent) 70%, transparent),
+			0 0 14px color-mix(in srgb, var(--accent) 55%, transparent),
+			0 0 28px color-mix(in srgb, var(--accent) 28%, transparent);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.has-btn-shine {
+			transition: none;
+		}
+
+		.has-btn-shine:hover::after,
+		.has-btn-shine:focus-visible::after {
+			animation: none;
+		}
 	}
 }

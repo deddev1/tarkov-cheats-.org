@@ -14,6 +14,14 @@ export type BrandThemeInput = {
 	deep?: string;
 	hover?: string;
 	panel?: string;
+	elevated?: string;
+	ink?: string;
+	inkMuted?: string;
+	inkFaint?: string;
+	line?: string;
+	input?: string;
+	ok?: string;
+	warn?: string;
 };
 
 export type BrandThemeResolved = {
@@ -25,6 +33,7 @@ export type BrandThemeResolved = {
 	bgPanel: string;
 	bgElevated: string;
 	bgHover: string;
+	bgInput: string;
 	line: string;
 	lineSoft: string;
 	lineStrong: string;
@@ -37,11 +46,12 @@ export type BrandThemeResolved = {
 };
 
 export const themeDefaults: BrandThemeInput = {
-	accent: '#c026d3',
-	bg: '#08090a',
+	accent: '#C6A15B',
+	bg: '#0A0B0A',
 };
 
 export const themePresets: { id: string; label: string; accent: string; bg: string }[] = [
+	{ id: 'tarkov', label: 'Tarkov Gold', accent: '#C6A15B', bg: '#0A0B0A' },
 	{ id: 'magenta', label: 'Magenta', accent: '#c026d3', bg: '#08090a' },
 	{ id: 'valorant', label: 'Valorant', accent: '#ff4655', bg: '#0f1419' },
 	{ id: 'fortnite', label: 'Fortnite', accent: '#2b9dff', bg: '#0a0e17' },
@@ -151,11 +161,12 @@ export function deriveBrandTheme(input: Partial<BrandThemeInput> = {}): BrandThe
 	const deep = normalizeHex(input.deep) ?? deepAuto;
 	const hover = normalizeHex(input.hover) ?? hoverAuto;
 	const bgPanel = normalizeHex(input.panel) ?? panelAuto;
-	const bgElevated = mixHex(bg, '#ffffff', 0.07);
-	const bgHover = mixHex(bg, '#ffffff', 0.1);
-	const lineSoft = mixHex(bg, '#ffffff', 0.08);
-	const line = mixHex(bg, '#ffffff', 0.12);
-	const lineStrong = mixHex(bg, '#ffffff', 0.18);
+	const bgElevated = normalizeHex(input.elevated) ?? mixHex(bg, '#ffffff', 0.07);
+	const bgInput = normalizeHex(input.input) ?? mixHex(bg, '#ffffff', 0.02);
+	const bgHover = mixHex(bgElevated, '#ffffff', 0.06);
+	const line = normalizeHex(input.line) ?? mixHex(bg, '#ffffff', 0.12);
+	const lineSoft = mixHex(bgPanel, line, 0.45);
+	const lineStrong = mixHex(line, '#ffffff', 0.12);
 	const toneVoid = mixHex(bg, '#000000', 0.35);
 
 	return {
@@ -167,14 +178,15 @@ export function deriveBrandTheme(input: Partial<BrandThemeInput> = {}): BrandThe
 		bgPanel,
 		bgElevated,
 		bgHover,
+		bgInput,
 		line,
 		lineSoft,
 		lineStrong,
-		ink: '#f5f5f7',
-		inkMuted: '#a1a1aa',
-		inkFaint: '#8b8b93',
-		ok: '#34d399',
-		warn: '#f43f5e',
+		ink: normalizeHex(input.ink) ?? '#FFFFFF',
+		inkMuted: normalizeHex(input.inkMuted) ?? '#E8EBE8',
+		inkFaint: normalizeHex(input.inkFaint) ?? '#C5CBC6',
+		ok: normalizeHex(input.ok) ?? '#78A66A',
+		warn: normalizeHex(input.warn) ?? '#B85C50',
 		toneVoid,
 	};
 }
@@ -201,6 +213,14 @@ export const brandTheme: BrandThemeResolved = deriveBrandTheme({
 	deep: raw.theme?.deep,
 	hover: raw.theme?.hover,
 	panel: raw.theme?.panel,
+	elevated: raw.theme?.elevated,
+	ink: raw.theme?.ink,
+	inkMuted: raw.theme?.inkMuted,
+	inkFaint: raw.theme?.inkFaint,
+	line: raw.theme?.line,
+	input: raw.theme?.input,
+	ok: raw.theme?.ok,
+	warn: raw.theme?.warn,
 });
 
 /** Inline style for <html> — overrides @theme defaults site-wide. */
@@ -218,6 +238,7 @@ export function brandThemeCssMap(theme: BrandThemeResolved = brandTheme): Record
 		'--bg-panel': theme.bgPanel,
 		'--bg-elevated': theme.bgElevated,
 		'--bg-hover': theme.bgHover,
+		'--bg-input': theme.bgInput,
 		'--line': theme.line,
 		'--line-soft': theme.lineSoft,
 		'--line-strong': theme.lineStrong,

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { StarRow } from '../../lib/review-stars';
 import I18nProvider from './I18nProvider';
 
 type Review = {
@@ -21,13 +22,17 @@ type Props = {
 
 function formatDate(iso: string, locale: string) {
 	return new Date(`${iso}T12:00:00`).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
-		month: 'long',
+		month: 'short',
 		year: 'numeric',
 	});
 }
 
 function initial(handle: string) {
 	return handle.replace(/^@/, '').charAt(0).toUpperCase();
+}
+
+function displayHandle(handle: string) {
+	return handle.startsWith('@') ? handle : `@${handle}`;
 }
 
 function HomeReviewsInner({
@@ -54,13 +59,7 @@ function HomeReviewsInner({
 					>
 						<strong>{ratingLabel}</strong>
 						<div>
-							<span className="reviews__stars" aria-hidden="true">
-								{[0, 1, 2, 3, 4].map((i) => (
-									<svg key={i} viewBox="0 0 20 20" fill="currentColor">
-										<path d="M10 2.5l2.2 5.1 5.5.5-4.2 3.7 1.3 5.4L10 14.4 5.2 17.2l1.3-5.4L2.3 8.1l5.5-.5L10 2.5z" />
-									</svg>
-								))}
-							</span>
+							<StarRow rating={averageRating} />
 							<p>{t('reviews.buyerReviews', { count: totalCount })}</p>
 						</div>
 					</div>
@@ -81,20 +80,23 @@ function HomeReviewsInner({
 											</span>
 											<div>
 												{copy === 1 ? (
-													<span className="review-card__name">{review.handle}</span>
+													<span className="review-card__name">{displayHandle(review.handle)}</span>
 												) : (
 													<a className="review-card__name" href={review.href}>
-														{review.handle}
+														{displayHandle(review.handle)}
 													</a>
 												)}
 												<time dateTime={review.date}>{formatDate(review.date, locale)}</time>
 											</div>
-											<span
-												className="review-card__rating"
-												aria-label={t('reviews.outOfFiveAria', { rating: review.rating })}
-											>
-												{review.rating}/5
-											</span>
+											<div className="review-card__rating-wrap">
+												<StarRow rating={review.rating} className="review-card__stars" />
+												<span
+													className="review-card__rating"
+													aria-label={t('reviews.outOfFiveAria', { rating: review.rating })}
+												>
+													{review.rating}/5
+												</span>
+											</div>
 										</footer>
 									</article>
 								</li>
